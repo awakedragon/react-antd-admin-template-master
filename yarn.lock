@@ -2512,10 +2512,10 @@ ansi-styles@^5.0.0:
   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/ansi-styles/-/ansi-styles-5.2.0.tgz#07449690ad45777d1924ac2abb2fc8895dba836b"
   integrity sha1-B0SWkK1Fd30ZJKwquy/IiV26g2s=
 
-antd@^3.17.0:
-  version "3.26.20"
-  resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/antd/-/antd-3.26.20.tgz#f3f570efaaa5950a144942f21eb2aaaa088e9407"
-  integrity sha1-8/Vw76qllQoUSULyHrKqqgiOlAc=
+antd@3.26.12:
+  version "3.26.12"
+  resolved "https://registry.npmmirror.com/antd/-/antd-3.26.12.tgz#2f075670780ac0490b2945d8bca883edcd93158c"
+  integrity sha512-aXiRDDpDx1jH/gKJDE2dgZPT1C7qurOZ1OSt9RklQT2K6CFlveF8HJY7Jz1/xHikXA+kmy6kr/OACJiaxBFRkA==
   dependencies:
     "@ant-design/create-react-context" "^0.2.4"
     "@ant-design/icons" "~2.1.1"
