@@ -47,19 +47,21 @@ class JobRecordComponent extends Component {
 
   componentDidMount () {
     this._isMounted = true
-    // if (typeof(this.props.location.listQuery.jobName)) {
-    //   console.log(this.props.location.listQuery.jobName)
-    //   this.setState({
-    //     loading: true,
-    //     listQuery: {
-    //       page: 1,
-    //       limit: 10,
-    //       jobName: this.props.location.listQuery.jobName
-    //     }
-    //   })
-    // }
-
-    this.fetchData()
+    console.log(this.props.location.reqParams)
+    if (typeof (this.props.location.reqParams) !== 'undefined') {
+      this.setState(
+        (state) => ({
+          listQuery: {
+            page: 1,
+            limit: 10,
+            jobName: this.props.location.reqParams
+          }
+        }),
+        () => {
+          this.fetchData()
+        }
+      )
+    }
     this.setState({ loading: false })
   }
 

@@ -12,7 +12,6 @@ const { Column } = Table
 const { Panel } = Collapse
 
 class GatJobComponent extends Component {
-
   _isMounted = false // 这个变量是用来标志当前组件是否挂载
   state = {
     list: [],
@@ -47,7 +46,6 @@ class GatJobComponent extends Component {
     shardingList: []
   }
 
-
   fetchData = () => {
     gatJobList(this.state.listQuery).then((response) => {
       if (response.data.code === 0) {
@@ -60,11 +58,6 @@ class GatJobComponent extends Component {
       }
     }).catch(e => {
       message.error('数据加载失败,请重试!')
-    })
-  }
-
-  resetForm = () => {
-    this.setState({
     })
   }
 
@@ -353,10 +346,6 @@ class GatJobComponent extends Component {
     })
   }
 
-  showJobRecord = () => {
-    this.props.history.push('./jobrecord')
-  }
-
   showAddNameSpaceModal = () => {
     this.setState({
       addNameSpaceModalVisible: true
@@ -489,11 +478,6 @@ class GatJobComponent extends Component {
                 </Button>
               </Form.Item>
               <Form.Item>
-                <Button type="primary" icon="search" onClick={this.resetForm} style={orangeButtonStyle}>
-                  重置
-                </Button>
-              </Form.Item>
-              <Form.Item>
                 <Button type="primary" icon="plus" onClick={this.showAddNameSpaceModal} style={orangeButtonStyle} >
                   添加命名空间
                 </Button>
@@ -514,17 +498,12 @@ class GatJobComponent extends Component {
           loading={this.state.loading}
           pagination={false}>
           <Column title="序号" key="index" width={50} align="center" render={(text, record, index) => { return index + 1 }} />
-          <Column title="ID" key="id" dataIndex="id" width={1} align="center" className="notshow" />
           <Column title="命名空间" dataIndex="zkPath" width={200} align="center"/>
           <Column title="作业名称" width={200} align="center"
                   render = {(text, record) => {
                     return <Link to={{
                       pathname: '/job/jobdetail',
-                      listQuery: {
-                        page: 1,
-                        limit: 10,
-                        jobName: record.jobName
-                      }
+                      params: record
                     }}>{record.jobName}</Link>
                   }}
           />
@@ -564,7 +543,8 @@ class GatJobComponent extends Component {
               if (record.status === '0') {
                 return (
                   <span>
-                    <Button key="1" type="primary" size="small" style={greenButtonStyle}>详情</Button>
+                    <Button key="1" type="primary" size="small" style={greenButtonStyle}>
+                      <Link to={{ pathname: '/job/jobrecord', reqParams: record.jobName }}>详情</Link></Button>
                     <Divider type="vertical" />
                     <Button key="2" type="primary" size="small" onClick={this.showEditGatJobModal.bind(null, record)} style={orangeButtonStyle}>编辑</Button>
                     <Divider type="vertical" />
@@ -572,7 +552,7 @@ class GatJobComponent extends Component {
                   </span>
                 )
               } else {
-                return (<span><Button key="1" type="primary" size="small" style={greenButtonStyle}>详情</Button></span>)
+                return (<span><Button key="1" type="primary" size="small" style={greenButtonStyle}><Link to={{ pathname: '/job/jobrecord', reqParams: record.jobName }}>详情</Link></Button></span>)
               }
             }}/>
         </Table>

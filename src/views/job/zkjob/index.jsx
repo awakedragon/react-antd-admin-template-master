@@ -53,15 +53,6 @@ class ZkJobComponent extends Component {
     })
   }
 
-  resetForm = () => {
-    this.setState({
-      listQuery: {
-        namespace: '',
-        jobName: ''
-      }
-    })
-  }
-
   fetchNameSpaceList = _ => {
     getNameSpaceList().then((response) => {
       response = response.data
@@ -276,11 +267,6 @@ class ZkJobComponent extends Component {
               <Form.Item>
                 <Button type="primary" icon="search" onClick={this.fetchData} style={orangeButtonStyle}>
                   搜索
-                </Button>
-              </Form.Item>
-              <Form.Item>
-                <Button type="primary" icon="search" onClick={this.resetForm} style={orangeButtonStyle}>
-                  重置
                 </Button>
               </Form.Item>
             </Form>
