@@ -1,0 +1,2149 @@
+Index: src/router/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React from 'react'\r\nimport { HashRouter, Route, Switch, Redirect } from 'react-router-dom'\r\nimport { connect } from 'react-redux'\r\nimport { getUserInfo } from '@/store/actions'\r\nimport Layout from '@/views/layout'\r\nimport Login from '@/views/login'\r\nclass Router extends React.Component {\r\n  render () {\r\n    const { token, role, getUserInfo } = this.props\r\n    return (\r\n      <HashRouter>\r\n        <Switch>\r\n          <Route exact path=\"/login\" component={Login} />\r\n          <Route\r\n            path=\"/\"\r\n            render={() => {\r\n              if (!token) {\r\n                return <Redirect to=\"/login\" />\r\n              } else {\r\n                if (role) {\r\n                  return <Layout />\r\n                } else {\r\n                  getUserInfo(token).then(() => <Layout />)\r\n                }\r\n              }\r\n            }}\r\n          />\r\n        </Switch>\r\n      </HashRouter>\r\n    )\r\n  }\r\n}\r\n\r\nexport default connect((state) => state.user, { getUserInfo })(Router)\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/router/index.js b/src/router/index.js
+--- a/src/router/index.js	(revision ce78f3d4461aba55c7fd324877a07b768c490a22)
++++ b/src/router/index.js	(date 1656850130834)
+@@ -1,17 +1,17 @@
+ import React from 'react'
+ import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
+ import { connect } from 'react-redux'
+-import { getUserInfo } from '@/store/actions'
+-import Layout from '@/views/layout'
+-import Login from '@/views/login'
++import { getUserInfo } from '../store/actions'
++import Layout from '../views/layout'
++import Login from '../views/login'
+ class Router extends React.Component {
+   render () {
+     const { token, role, getUserInfo } = this.props
+     return (
+       <HashRouter>
+         <Switch>
+-          <Route exact path="/login" component={Login} />
+-          <Route
++           <Route exact path="/login" component={Login} />
++           <Route
+             path="/"
+             render={() => {
+               if (!token) {
+@@ -24,7 +24,7 @@
+                 }
+               }
+             }}
+-          />
++           />
+         </Switch>
+       </HashRouter>
+     )
+Index: src/styles/index.less
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>@import './transition.less';\r\n\r\nbody {\r\n  height: 100%;\r\n  -moz-osx-font-smoothing: grayscale;\r\n  -webkit-font-smoothing: antialiased;\r\n  text-rendering: optimizeLegibility;\r\n  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB,\r\n    Microsoft YaHei, Arial, sans-serif;\r\n}\r\n\r\nhtml {\r\n  height: 100%;\r\n  box-sizing: border-box;\r\n}\r\n#root {\r\n  height: 100%;\r\n}\r\n.ant-layout {\r\n  height: 100%;\r\n}\r\n*,\r\n*:before,\r\n*:after {\r\n  box-sizing: inherit;\r\n}\r\n\r\n.no-padding {\r\n  padding: 0px !important;\r\n}\r\n\r\n.padding-content {\r\n  padding: 4px 0;\r\n}\r\n\r\na:focus,\r\na:active {\r\n  outline: none;\r\n}\r\n\r\na,\r\na:focus,\r\na:hover {\r\n  cursor: pointer;\r\n  // color: inherit;\r\n  text-decoration: none;\r\n}\r\n\r\ndiv:focus {\r\n  outline: none;\r\n}\r\n\r\n.fr {\r\n  float: right;\r\n}\r\n\r\n.fl {\r\n  float: left;\r\n}\r\n\r\n.pr-5 {\r\n  padding-right: 5px;\r\n}\r\n\r\n.pl-5 {\r\n  padding-left: 5px;\r\n}\r\n\r\n.block {\r\n  display: block;\r\n}\r\n\r\n.pointer {\r\n  cursor: pointer;\r\n}\r\n\r\n.inlineBlock {\r\n  display: block;\r\n}\r\n\r\n.clearfix {\r\n  &:after {\r\n    visibility: hidden;\r\n    display: block;\r\n    font-size: 0;\r\n    content: \" \";\r\n    clear: both;\r\n    height: 0;\r\n  }\r\n}\r\n\r\n.app-container {\r\n  padding: 20px;\r\n}\r\n\r\n.greenButtonStyle {\r\n  color: #fff;\r\n  background: #67c23a;\r\n  borderColor: #67c23a;\r\n}\r\n\r\n.redButtonStyle {\r\n  color: #fff;\r\n  background: #f56c6c;\r\n  borderColor: #f56c6c;\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/styles/index.less b/src/styles/index.less
+--- a/src/styles/index.less	(revision ce78f3d4461aba55c7fd324877a07b768c490a22)
++++ b/src/styles/index.less	(date 1656831406162)
+@@ -92,15 +92,3 @@
+ .app-container {
+   padding: 20px;
+ }
+-
+-.greenButtonStyle {
+-  color: #fff;
+-  background: #67c23a;
+-  borderColor: #67c23a;
+-}
+-
+-.redButtonStyle {
+-  color: #fff;
+-  background: #f56c6c;
+-  borderColor: #f56c6c;
+-}
+Index: package.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{\r\n  \"name\": \"react_antd_admin_template\",\r\n  \"version\": \"1.0.0\",\r\n  \"author\": \"NLRX <414961362@qq.com>\",\r\n  \"license\": \"MIT\",\r\n  \"private\": true,\r\n  \"dependencies\": {\r\n    \"@testing-library/jest-dom\": \"^4.2.4\",\r\n    \"@testing-library/react\": \"^9.5.0\",\r\n    \"@testing-library/user-event\": \"^7.2.1\",\r\n    \"@toast-ui/react-editor\": \"^2.1.0\",\r\n    \"antd\": \"3.26.12\",\r\n    \"axios\": \"^0.19.2\",\r\n    \"clipboard\": \"^2.0.6\",\r\n    \"draft-js\": \"^0.11.5\",\r\n    \"draftjs-to-html\": \"^0.9.1\",\r\n    \"draftjs-to-markdown\": \"^0.6.0\",\r\n    \"driver.js\": \"^0.9.8\",\r\n    \"echarts\": \"^4.7.0\",\r\n    \"file-saver\": \"^2.0.2\",\r\n    \"js-cookie\": \"^2.2.1\",\r\n    \"jszip\": \"^3.4.0\",\r\n    \"less\": \"^3.9.0\",\r\n    \"less-loader\": \"^5.0.0\",\r\n    \"nprogress\": \"^0.2.0\",\r\n    \"prop-types\": \"^15.7.2\",\r\n    \"react\": \"^16.13.1\",\r\n    \"react-beautiful-dnd\": \"^13.0.0\",\r\n    \"react-countup\": \"^4.3.3\",\r\n    \"react-custom-scrollbars\": \"^4.2.1\",\r\n    \"react-document-title\": \"^2.0.3\",\r\n    \"react-dom\": \"^16.13.1\",\r\n    \"react-draft-wysiwyg\": \"^1.14.5\",\r\n    \"react-loadable\": \"^5.5.0\",\r\n    \"react-redux\": \"^7.2.0\",\r\n    \"react-router-dom\": \"^5.1.2\",\r\n    \"react-scripts\": \"3.4.1\",\r\n    \"react-transition-group\": \"^4.4.1\",\r\n    \"redux\": \"^4.0.5\",\r\n    \"redux-thunk\": \"^2.3.0\",\r\n    \"screenfull\": \"^5.0.2\",\r\n    \"script-loader\": \"^0.7.2\",\r\n    \"xlsx\": \"^0.16.0\"\r\n  },\r\n  \"scripts\": {\r\n    \"start\": \"react-app-rewired start\",\r\n    \"build\": \"react-app-rewired --max-old-space-size=4096 build \",\r\n    \"test\": \"react-app-rewired test\",\r\n    \"eject\": \"react-scripts eject\",\r\n    \"commit\": \"git cz\"\r\n  },\r\n  \"eslintConfig\": {\r\n    \"extends\": \"react-app\"\r\n  },\r\n  \"browserslist\": {\r\n    \"production\": [\r\n      \">0.2%\",\r\n      \"not dead\",\r\n      \"not op_mini all\"\r\n    ],\r\n    \"development\": [\r\n      \"last 1 chrome version\",\r\n      \"last 1 firefox version\",\r\n      \"last 1 safari version\"\r\n    ]\r\n  },\r\n  \"devDependencies\": {\r\n    \"@typescript-eslint/eslint-plugin\": \"^5.30.0\",\r\n    \"@typescript-eslint/parser\": \"^5.30.0\",\r\n    \"babel-plugin-import\": \"^1.13.0\",\r\n    \"commitizen\": \"^4.0.3\",\r\n    \"customize-cra\": \"^0.9.1\",\r\n    \"cz-conventional-changelog\": \"^3.0.2\",\r\n    \"eslint\": \"^8.0.1\",\r\n    \"eslint-config-standard\": \"^17.0.0\",\r\n    \"eslint-plugin-import\": \"^2.25.2\",\r\n    \"eslint-plugin-n\": \"^15.0.0\",\r\n    \"eslint-plugin-promise\": \"^6.0.0\",\r\n    \"eslint-plugin-react\": \"^7.30.1\",\r\n    \"mockjs\": \"^1.1.0\",\r\n    \"react-app-rewired\": \"^2.1.5\",\r\n    \"user-agent\": \"^1.0.4\"\r\n  },\r\n  \"config\": {\r\n    \"commitizen\": {\r\n      \"path\": \"./node_modules/cz-conventional-changelog\"\r\n    }\r\n  },\r\n  \"proxy\": \"http://localhost:8888\"\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/package.json b/package.json
+--- a/package.json	(revision ce78f3d4461aba55c7fd324877a07b768c490a22)
++++ b/package.json	(date 1656844584229)
+@@ -20,8 +20,6 @@
+     "file-saver": "^2.0.2",
+     "js-cookie": "^2.2.1",
+     "jszip": "^3.4.0",
+-    "less": "^3.9.0",
+-    "less-loader": "^5.0.0",
+     "nprogress": "^0.2.0",
+     "prop-types": "^15.7.2",
+     "react": "^16.13.1",
+@@ -65,10 +63,17 @@
+     ]
+   },
+   "devDependencies": {
++    "@babel/core": "^7.18.6",
++    "@babel/preset-env": "^7.18.6",
++    "@babel/preset-react": "^7.18.6",
++    "@babel/runtime": "^7.18.6",
+     "@typescript-eslint/eslint-plugin": "^5.30.0",
+     "@typescript-eslint/parser": "^5.30.0",
++    "babel-loader": "^8.2.5",
+     "babel-plugin-import": "^1.13.0",
++    "clean-webpack-plugin": "^4.0.0",
+     "commitizen": "^4.0.3",
++    "css-loader": "^6.7.1",
+     "customize-cra": "^0.9.1",
+     "cz-conventional-changelog": "^3.0.2",
+     "eslint": "^8.0.1",
+@@ -77,9 +82,16 @@
+     "eslint-plugin-n": "^15.0.0",
+     "eslint-plugin-promise": "^6.0.0",
+     "eslint-plugin-react": "^7.30.1",
++    "friendly-errors-webpack-plugin": "^1.7.0",
++    "html-webpack-plugin": "^5.5.0",
++    "less": "2.3.1",
++    "less-loader": "3.0.0",
+     "mockjs": "^1.1.0",
+     "react-app-rewired": "^2.1.5",
+-    "user-agent": "^1.0.4"
++    "style-loader": "^3.3.1",
++    "user-agent": "^1.0.4",
++    "webpack": "^5.73.0",
++    "webpack-cli": "^4.10.0"
+   },
+   "config": {
+     "commitizen": {
+Index: src/utils/request.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import axios from \"axios\";\r\nimport store from \"@/store\";\r\nimport { Modal } from \"antd\";\r\nimport { getToken } from \"@/utils/auth\";\r\nimport { logout } from \"@/store/actions\";\r\n\r\n//创建一个axios示例\r\nconst service = axios.create({\r\n  baseURL: process.env.REACT_APP_BASE_API, // api 的 base_url\r\n  timeout: 5000, // request timeout\r\n  withCredentials: true,\r\n});\r\n\r\n// 请求拦截器\r\nservice.interceptors.request.use(\r\n  (config) => {\r\n    // Do something before request is sent\r\n    if (store.getState().user.token) {\r\n      // 让每个请求携带token-- ['Authorization']为自定义key 请根据实际情况自行修改\r\n      config.headers.Authorization = getToken();\r\n    }\r\n    return config;\r\n  },\r\n  (error) => {\r\n    // Do something with request error\r\n    console.log(error); // for debug\r\n    Promise.reject(error);\r\n  }\r\n);\r\n\r\n// 响应拦截器\r\nservice.interceptors.response.use(\r\n  (response) => response,\r\n  /**\r\n   * 下面的注释为通过在response里，自定义code来标示请求状态\r\n   * 当code返回如下情况则说明权限有问题，登出并返回到登录页\r\n   * 如想通过 xmlhttprequest 来状态码标识 逻辑可写在下面error中\r\n   * 以下代码均为样例，请结合自生需求加以修改，若不需要，则可删除\r\n   */\r\n  // response => {\r\n  //   const res = response.data\r\n  //   if (res.code !== 20000) {\r\n  //     Message({\r\n  //       message: res.message,\r\n  //       type: 'error',\r\n  //       duration: 5 * 1000\r\n  //     })\r\n  //     // 50008:非法的token; 50012:其他客户端登录了;  50014:Token 过期了;\r\n  //     if (res.code === 50008 || res.code === 50012 || res.code === 50014) {\r\n  //       // 请自行在引入 MessageBox\r\n  //       // import { Message, MessageBox } from 'element-ui'\r\n  //       MessageBox.confirm('你已被登出，可以取消继续留在该页面，或者重新登录', '确定登出', {\r\n  //         confirmButtonText: '重新登录',\r\n  //         cancelButtonText: '取消',\r\n  //         type: 'warning'\r\n  //       }).then(() => {\r\n  //         store.dispatch('FedLogOut').then(() => {\r\n  //           location.reload() // 为了重新实例化vue-router对象 避免bug\r\n  //         })\r\n  //       })\r\n  //     }\r\n  //     return Promise.reject('error')\r\n  //   } else {\r\n  //     return response.data\r\n  //   }\r\n  // },\r\n  (error) => {\r\n    console.log(\"err\" + error); // for debug\r\n    const { status } = error.response;\r\n    if (status === 403) {\r\n      Modal.confirm({\r\n        title: \"确定登出?\",\r\n        content:\r\n          \"由于长时间未操作，您已被登出，可以取消继续留在该页面，或者重新登录\",\r\n        okText: \"重新登录\",\r\n        cancelText: \"取消\",\r\n        onOk() {\r\n          let token = store.getState().user.token;\r\n          store.dispatch(logout(token));\r\n        },\r\n        onCancel() {\r\n          console.log(\"Cancel\");\r\n        },\r\n      });\r\n    }\r\n    return Promise.reject(error);\r\n  }\r\n);\r\n\r\nexport default service;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/utils/request.js b/src/utils/request.js
+--- a/src/utils/request.js	(revision ce78f3d4461aba55c7fd324877a07b768c490a22)
++++ b/src/utils/request.js	(date 1656844334236)
+@@ -1,15 +1,15 @@
+-import axios from "axios";
+-import store from "@/store";
+-import { Modal } from "antd";
+-import { getToken } from "@/utils/auth";
+-import { logout } from "@/store/actions";
++import axios from 'axios'
++import store from '@/store'
++import { Modal } from 'antd'
++import { getToken } from '@/utils/auth'
++import { logout } from '@/store/actions'
+ 
+-//创建一个axios示例
++// 创建一个axios示例
+ const service = axios.create({
+   baseURL: process.env.REACT_APP_BASE_API, // api 的 base_url
+   timeout: 5000, // request timeout
+-  withCredentials: true,
+-});
++  withCredentials: true
++})
+ 
+ // 请求拦截器
+ service.interceptors.request.use(
+@@ -17,16 +17,16 @@
+     // Do something before request is sent
+     if (store.getState().user.token) {
+       // 让每个请求携带token-- ['Authorization']为自定义key 请根据实际情况自行修改
+-      config.headers.Authorization = getToken();
++      config.headers.Authorization = getToken()
+     }
+-    return config;
++    return config
+   },
+   (error) => {
+     // Do something with request error
+-    console.log(error); // for debug
+-    Promise.reject(error);
++    console.log(error) // for debug
++    Promise.reject(error)
+   }
+-);
++)
+ 
+ // 响应拦截器
+ service.interceptors.response.use(
+@@ -65,26 +65,26 @@
+   //   }
+   // },
+   (error) => {
+-    console.log("err" + error); // for debug
+-    const { status } = error.response;
++    console.log('err' + error) // for debug
++    const { status } = error.response
+     if (status === 403) {
+       Modal.confirm({
+-        title: "确定登出?",
++        title: '确定登出?',
+         content:
+-          "由于长时间未操作，您已被登出，可以取消继续留在该页面，或者重新登录",
+-        okText: "重新登录",
+-        cancelText: "取消",
+-        onOk() {
+-          let token = store.getState().user.token;
+-          store.dispatch(logout(token));
++          '由于长时间未操作，您已被登出，可以取消继续留在该页面，或者重新登录',
++        okText: '重新登录',
++        cancelText: '取消',
++        onOk () {
++          const token = store.getState().user.token
++          store.dispatch(logout(token))
+         },
+-        onCancel() {
+-          console.log("Cancel");
+-        },
+-      });
++        onCancel () {
++          console.log('Cancel')
++        }
++      })
+     }
+-    return Promise.reject(error);
++    return Promise.reject(error)
+   }
+-);
++)
+ 
+-export default service;
++export default service
+Index: src/utils/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>export function debounce(func, wait, immediate) {\r\n  let timeout, args, context, timestamp, result;\r\n\r\n  const later = function () {\r\n    // 据上一次触发时间间隔\r\n    const last = +new Date() - timestamp;\r\n\r\n    // 上次被包装函数被调用时间间隔 last 小于设定时间间隔 wait\r\n    if (last < wait && last > 0) {\r\n      timeout = setTimeout(later, wait - last);\r\n    } else {\r\n      timeout = null;\r\n      // 如果设定为immediate===true，因为开始边界已经调用过了此处无需调用\r\n      if (!immediate) {\r\n        result = func.apply(context, args);\r\n        if (!timeout) context = args = null;\r\n      }\r\n    }\r\n  };\r\n\r\n  return function (...args) {\r\n    context = this;\r\n    timestamp = +new Date();\r\n    const callNow = immediate && !timeout;\r\n    // 如果延时不存在，重新设定延时\r\n    if (!timeout) timeout = setTimeout(later, wait);\r\n    if (callNow) {\r\n      result = func.apply(context, args);\r\n      context = args = null;\r\n    }\r\n\r\n    return result;\r\n  };\r\n}\r\n// 根据某个属性值从MenuList查找拥有该属性值的menuItem\r\nexport function getMenuItemInMenuListByProperty(menuList, key, value) {\r\n  let stack = [];\r\n  stack = stack.concat(menuList);\r\n  let res;\r\n  while (stack.length) {\r\n    let cur = stack.shift();\r\n    if (cur.children && cur.children.length > 0) {\r\n      stack = cur.children.concat(stack);\r\n    }\r\n    if (value === cur[key]) {\r\n      res = cur;\r\n    }\r\n  }\r\n  return res;\r\n}\r\n\r\n/**\r\n * @description 将时间戳转换为年-月-日-时-分-秒格式\r\n * @param {String} timestamp\r\n * @returns {String} 年-月-日-时-分-秒\r\n */\r\n\r\nexport function timestampToTime(timestamp) {\r\n  var date = new Date(timestamp);\r\n  var Y = date.getFullYear() + '-';\r\n  var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';\r\n  var D = (date.getDate() < 10 ? '0'+date.getDate() : date.getDate()) + ' ';\r\n  var h = (date.getHours() < 10 ? '0'+date.getHours() : date.getHours()) + ':';\r\n  var m = (date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes()) + ':';\r\n  var s = (date.getSeconds() < 10 ? '0'+date.getSeconds() : date.getSeconds());\r\n  \r\n  let strDate = Y+M+D+h+m+s;\r\n  return strDate;\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/utils/index.js b/src/utils/index.js
+--- a/src/utils/index.js	(revision ce78f3d4461aba55c7fd324877a07b768c490a22)
++++ b/src/utils/index.js	(date 1656844334248)
+@@ -1,52 +1,52 @@
+-export function debounce(func, wait, immediate) {
+-  let timeout, args, context, timestamp, result;
++export function debounce (func, wait, immediate) {
++  let timeout, args, context, timestamp, result
+ 
+   const later = function () {
+     // 据上一次触发时间间隔
+-    const last = +new Date() - timestamp;
++    const last = +new Date() - timestamp
+ 
+     // 上次被包装函数被调用时间间隔 last 小于设定时间间隔 wait
+     if (last < wait && last > 0) {
+-      timeout = setTimeout(later, wait - last);
++      timeout = setTimeout(later, wait - last)
+     } else {
+-      timeout = null;
++      timeout = null
+       // 如果设定为immediate===true，因为开始边界已经调用过了此处无需调用
+       if (!immediate) {
+-        result = func.apply(context, args);
+-        if (!timeout) context = args = null;
++        result = func.apply(context, args)
++        if (!timeout) context = args = null
+       }
+     }
+-  };
++  }
+ 
+   return function (...args) {
+-    context = this;
+-    timestamp = +new Date();
+-    const callNow = immediate && !timeout;
++    context = this
++    timestamp = +new Date()
++    const callNow = immediate && !timeout
+     // 如果延时不存在，重新设定延时
+-    if (!timeout) timeout = setTimeout(later, wait);
++    if (!timeout) timeout = setTimeout(later, wait)
+     if (callNow) {
+-      result = func.apply(context, args);
+-      context = args = null;
++      result = func.apply(context, args)
++      context = args = null
+     }
+ 
+-    return result;
+-  };
++    return result
++  }
+ }
+ // 根据某个属性值从MenuList查找拥有该属性值的menuItem
+-export function getMenuItemInMenuListByProperty(menuList, key, value) {
+-  let stack = [];
+-  stack = stack.concat(menuList);
+-  let res;
++export function getMenuItemInMenuListByProperty (menuList, key, value) {
++  let stack = []
++  stack = stack.concat(menuList)
++  let res
+   while (stack.length) {
+-    let cur = stack.shift();
++    const cur = stack.shift()
+     if (cur.children && cur.children.length > 0) {
+-      stack = cur.children.concat(stack);
++      stack = cur.children.concat(stack)
+     }
+     if (value === cur[key]) {
+-      res = cur;
++      res = cur
+     }
+   }
+-  return res;
++  return res
+ }
+ 
+ /**
+@@ -55,15 +55,15 @@
+  * @returns {String} 年-月-日-时-分-秒
+  */
+ 
+-export function timestampToTime(timestamp) {
+-  var date = new Date(timestamp);
+-  var Y = date.getFullYear() + '-';
+-  var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+-  var D = (date.getDate() < 10 ? '0'+date.getDate() : date.getDate()) + ' ';
+-  var h = (date.getHours() < 10 ? '0'+date.getHours() : date.getHours()) + ':';
+-  var m = (date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes()) + ':';
+-  var s = (date.getSeconds() < 10 ? '0'+date.getSeconds() : date.getSeconds());
+-  
+-  let strDate = Y+M+D+h+m+s;
+-  return strDate;
+-}
+\ No newline at end of file
++export function timestampToTime (timestamp) {
++  const date = new Date(timestamp)
++  const Y = date.getFullYear() + '-'
++  const M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
++  const D = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) + ' '
++  const h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':'
++  const m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':'
++  const s = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds())
++
++  const strDate = Y + M + D + h + m + s
++  return strDate
++}
+Index: src/utils/typing.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>class Typing {\r\n  constructor(opts) {\r\n    this.opts = opts || {};\r\n    this.source = opts.source;\r\n    this.output = opts.output;\r\n    this.delay = opts.delay || 120;\r\n    this.chain = {\r\n      parent: null,\r\n      dom: this.output,\r\n      val: []\r\n    };\r\n    if (!(typeof this.opts.done === 'function')) this.opts.done = function () {\r\n    };\r\n  }\r\n\r\n  init() {\r\n    //初始化函数\r\n    this.chain.val = this.convert(this.source, this.chain.val);\r\n  }\r\n\r\n  convert(dom, arr) {\r\n    //将dom节点的子节点转换成数组，\r\n    let children = Array.from(dom.childNodes)\r\n    for (let i = 0; i < children.length; i++) {\r\n      let node = children[i]\r\n      if (node.nodeType === 3) {\r\n        arr = arr.concat(node.nodeValue.split(''))   //将字符串转换成字符串数组，后面打印时才会一个一个的打印\r\n      } else if (node.nodeType === 1) {\r\n        let val = []\r\n        val = this.convert(node, val)\r\n        arr.push({\r\n          'dom': node,\r\n          'val': val\r\n        })\r\n      }\r\n    }\r\n    return arr\r\n  }\r\n\r\n  print(dom, val, callback) {\r\n    setTimeout(function () {\r\n      dom.appendChild(document.createTextNode(val));\r\n      callback();\r\n    }, this.delay);\r\n  }\r\n\r\n  play(ele) {\r\n    //当打印最后一个字符时，动画完毕，执行done\r\n    if (!ele.val.length) {\r\n      if (ele.parent) this.play(ele.parent);\r\n      else this.opts.done();\r\n      return;\r\n    }\r\n    let current = ele.val.shift()  //获取第一个元素，同时删除数组中的第一个元素\r\n    if (typeof current === 'string') {\r\n      this.print(ele.dom, current, () => {\r\n        this.play(ele); //继续打印下一个字符\r\n      })\r\n    } else {\r\n      let dom = current.dom.cloneNode() //克隆节点，不克隆节点的子节点，所以不用加参数true\r\n      ele.dom.appendChild(dom)\r\n      this.play({\r\n        parent: ele,\r\n        dom,\r\n        val: current.val\r\n      })\r\n    }\r\n  }\r\n\r\n  start() {\r\n    this.init();\r\n    this.play(this.chain);\r\n  }\r\n}\r\n\r\nexport default Typing
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/utils/typing.js b/src/utils/typing.js
+--- a/src/utils/typing.js	(revision ce78f3d4461aba55c7fd324877a07b768c490a22)
++++ b/src/utils/typing.js	(date 1656844334242)
+@@ -1,63 +1,65 @@
+ class Typing {
+-  constructor(opts) {
+-    this.opts = opts || {};
+-    this.source = opts.source;
+-    this.output = opts.output;
+-    this.delay = opts.delay || 120;
++  constructor (opts) {
++    this.opts = opts || {}
++    this.source = opts.source
++    this.output = opts.output
++    this.delay = opts.delay || 120
+     this.chain = {
+       parent: null,
+       dom: this.output,
+       val: []
+-    };
+-    if (!(typeof this.opts.done === 'function')) this.opts.done = function () {
+-    };
++    }
++    if (!(typeof this.opts.done === 'function')) {
++      this.opts.done = function () {
++      }
++    }
+   }
+ 
+-  init() {
+-    //初始化函数
+-    this.chain.val = this.convert(this.source, this.chain.val);
++  init () {
++    // 初始化函数
++    this.chain.val = this.convert(this.source, this.chain.val)
+   }
+ 
+-  convert(dom, arr) {
+-    //将dom节点的子节点转换成数组，
+-    let children = Array.from(dom.childNodes)
++  convert (dom, arr) {
++    // 将dom节点的子节点转换成数组，
++    const children = Array.from(dom.childNodes)
+     for (let i = 0; i < children.length; i++) {
+-      let node = children[i]
++      const node = children[i]
+       if (node.nodeType === 3) {
+-        arr = arr.concat(node.nodeValue.split(''))   //将字符串转换成字符串数组，后面打印时才会一个一个的打印
++        arr = arr.concat(node.nodeValue.split('')) // 将字符串转换成字符串数组，后面打印时才会一个一个的打印
+       } else if (node.nodeType === 1) {
+         let val = []
+         val = this.convert(node, val)
+         arr.push({
+-          'dom': node,
+-          'val': val
++          dom: node,
++          val
+         })
+       }
+     }
+     return arr
+   }
+ 
+-  print(dom, val, callback) {
++  print (dom, val, callback) {
+     setTimeout(function () {
+-      dom.appendChild(document.createTextNode(val));
+-      callback();
+-    }, this.delay);
++      dom.appendChild(document.createTextNode(val))
++      callback()
++    }, this.delay)
+   }
+ 
+-  play(ele) {
+-    //当打印最后一个字符时，动画完毕，执行done
++  play (ele) {
++    // 当打印最后一个字符时，动画完毕，执行done
+     if (!ele.val.length) {
+-      if (ele.parent) this.play(ele.parent);
+-      else this.opts.done();
+-      return;
++      if (ele.parent) this.play(ele.parent)
++      else this.opts.done()
++      return
+     }
+-    let current = ele.val.shift()  //获取第一个元素，同时删除数组中的第一个元素
++    const current = ele.val.shift() // 获取第一个元素，同时删除数组中的第一个元素
+     if (typeof current === 'string') {
+       this.print(ele.dom, current, () => {
+-        this.play(ele); //继续打印下一个字符
++        this.play(ele) // 继续打印下一个字符
+       })
+     } else {
+-      let dom = current.dom.cloneNode() //克隆节点，不克隆节点的子节点，所以不用加参数true
++      const dom = current.dom.cloneNode() // 克隆节点，不克隆节点的子节点，所以不用加参数true
+       ele.dom.appendChild(dom)
+       this.play({
+         parent: ele,
+@@ -67,10 +69,10 @@
+     }
+   }
+ 
+-  start() {
+-    this.init();
+-    this.play(this.chain);
++  start () {
++    this.init()
++    this.play(this.chain)
+   }
+ }
+ 
+-export default Typing
+\ No newline at end of file
++export default Typing
+Index: src/utils/clipboard.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import Clipboard from \"clipboard\";\r\nimport { message } from \"antd\";\r\n\r\nfunction clipboardSuccess() {\r\n  message.success(\"复制成功\");\r\n}\r\n\r\nfunction clipboardError() {\r\n  message.error(\"复制失败\");\r\n}\r\n\r\nexport default function handleClipboard(text, event) {\r\n  const clipboard = new Clipboard(event.target, {\r\n    text: () => text,\r\n  });\r\n  clipboard.on(\"success\", () => {\r\n    clipboardSuccess();\r\n    clipboard.destroy();\r\n  });\r\n  clipboard.on(\"error\", () => {\r\n    clipboardError();\r\n    clipboard.destroy();\r\n  });\r\n  clipboard.onClick(event);\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/utils/clipboard.js b/src/utils/clipboard.js
+--- a/src/utils/clipboard.js	(revision ce78f3d4461aba55c7fd324877a07b768c490a22)
++++ b/src/utils/clipboard.js	(date 1656844334230)
+@@ -1,25 +1,25 @@
+-import Clipboard from "clipboard";
+-import { message } from "antd";
++import Clipboard from 'clipboard'
++import { message } from 'antd'
+ 
+-function clipboardSuccess() {
+-  message.success("复制成功");
++function clipboardSuccess () {
++  message.success('复制成功')
+ }
+ 
+-function clipboardError() {
+-  message.error("复制失败");
++function clipboardError () {
++  message.error('复制失败')
+ }
+ 
+-export default function handleClipboard(text, event) {
++export default function handleClipboard (text, event) {
+   const clipboard = new Clipboard(event.target, {
+-    text: () => text,
+-  });
+-  clipboard.on("success", () => {
+-    clipboardSuccess();
+-    clipboard.destroy();
+-  });
+-  clipboard.on("error", () => {
+-    clipboardError();
+-    clipboard.destroy();
+-  });
+-  clipboard.onClick(event);
++    text: () => text
++  })
++  clipboard.on('success', () => {
++    clipboardSuccess()
++    clipboard.destroy()
++  })
++  clipboard.on('error', () => {
++    clipboardError()
++    clipboard.destroy()
++  })
++  clipboard.onClick(event)
+ }
+Index: src/utils/auth.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import Cookies from 'js-cookie'\r\n\r\nconst TokenKey = 'Token'\r\n\r\nexport function getToken() {\r\n  return Cookies.get(TokenKey)\r\n}\r\n\r\nexport function setToken(token) {\r\n  return Cookies.set(TokenKey, token)\r\n}\r\n\r\nexport function removeToken() {\r\n  return Cookies.remove(TokenKey)\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/utils/auth.js b/src/utils/auth.js
+--- a/src/utils/auth.js	(revision ce78f3d4461aba55c7fd324877a07b768c490a22)
++++ b/src/utils/auth.js	(date 1656844334224)
+@@ -2,14 +2,14 @@
+ 
+ const TokenKey = 'Token'
+ 
+-export function getToken() {
++export function getToken () {
+   return Cookies.get(TokenKey)
+ }
+ 
+-export function setToken(token) {
++export function setToken (token) {
+   return Cookies.set(TokenKey, token)
+ }
+ 
+-export function removeToken() {
++export function removeToken () {
+   return Cookies.remove(TokenKey)
+ }
+Index: .babelrc
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.babelrc b/.babelrc
+new file mode 100644
+--- /dev/null	(date 1656775973890)
++++ b/.babelrc	(date 1656775973890)
+@@ -0,0 +1,6 @@
++{
++  "presets": [
++    "@babel/preset-react",
++    "@babel/preset-env"
++  ]
++}
+\ No newline at end of file
+Index: webpack.config.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/webpack.config.js b/webpack.config.js
+new file mode 100644
+--- /dev/null	(date 1656843337793)
++++ b/webpack.config.js	(date 1656843337793)
+@@ -0,0 +1,69 @@
++const path = require('path')
++const HtmlWebpackPlugin = require('html-webpack-plugin')
++const { CleanWebpackPlugin } = require('clean-webpack-plugin')
++const friendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
++
++module.exports = {
++  // 打包环境，测试环境还是生产环境，不添加会报警告
++  mode: 'development',
++  // 相对路径
++  entry: {
++    app: './src/index.js'
++  },
++  // 输出配置
++  output: {
++    // 输出在项目根目录的dist文件夹，会自动创建
++    path: path.resolve(__dirname, './dist'),
++    // js的文件名称
++    filename: '[name].bundle.js'
++  },
++  plugins: [
++    new HtmlWebpackPlugin({
++      // 模板路径，注意需要和index.html路径对应
++      template: path.resolve(__dirname, './public/index.html'),
++      // 文件名称
++      filename: 'index.html'
++    }),
++    new CleanWebpackPlugin(),
++    new friendlyErrorsWebpackPlugin()
++  ],
++  module: {
++    rules: [
++      {
++        test: /\.(js|jsx)$/,
++        loader: 'babel-loader',
++        exclude: /node_modules/
++      },
++      {
++        test: /\.css$/,
++        loader: 'css-loader',
++        exclude: /node_modules/
++      },
++      {
++        test: /\.less$/,
++        use: [
++          {
++            loader: 'style-loader'
++          },
++          {
++            loader: 'css-loader'
++          },
++          {
++            loader: 'less-loader',
++            options: {
++              lessOptions: {
++                strictMath: true
++              }
++            }
++          }
++        ]
++      }
++    ]
++  },
++  resolve: {
++    alias: {
++      '@': path.resolve('./src')
++    }
++  }
++
++}
+Index: yarn.lock
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/yarn.lock b/yarn.lock
+--- a/yarn.lock	(revision ce78f3d4461aba55c7fd324877a07b768c490a22)
++++ b/yarn.lock	(date 1656844584220)
+@@ -84,7 +84,7 @@
+     semver "^5.4.1"
+     source-map "^0.5.0"
+ 
+-"@babel/core@^7.1.0", "@babel/core@^7.4.5":
++"@babel/core@^7.1.0", "@babel/core@^7.18.6", "@babel/core@^7.4.5":
+   version "7.18.6"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/@babel/core/-/core-7.18.6.tgz#54a107a3c298aee3fe5e1947a6464b9b6faca03d"
+   integrity sha1-VKEHo8KYruP+XhlHpkZLm2+soD0=
+@@ -1051,7 +1051,7 @@
+     levenary "^1.1.1"
+     semver "^5.5.0"
+ 
+-"@babel/preset-env@^7.4.5":
++"@babel/preset-env@^7.18.6", "@babel/preset-env@^7.4.5":
+   version "7.18.6"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/@babel/preset-env/-/preset-env-7.18.6.tgz#953422e98a5f66bc56cd0b9074eaea127ec86ace"
+   integrity sha1-lTQi6YpfZrxWzQuQdOrqEn7Ias4=
+@@ -1155,7 +1155,7 @@
+     "@babel/plugin-transform-react-jsx-self" "^7.9.0"
+     "@babel/plugin-transform-react-jsx-source" "^7.9.0"
+ 
+-"@babel/preset-react@^7.0.0":
++"@babel/preset-react@^7.0.0", "@babel/preset-react@^7.18.6":
+   version "7.18.6"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/@babel/preset-react/-/preset-react-7.18.6.tgz#979f76d6277048dc19094c217b507f3ad517dd2d"
+   integrity sha1-l5921idwSNwZCUwhe1B/OtUX3S0=
+@@ -1190,7 +1190,7 @@
+   dependencies:
+     regenerator-runtime "^0.13.4"
+ 
+-"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.10.2", "@babel/runtime@^7.12.1", "@babel/runtime@^7.12.13", "@babel/runtime@^7.12.5", "@babel/runtime@^7.15.4", "@babel/runtime@^7.3.4", "@babel/runtime@^7.4.5", "@babel/runtime@^7.5.1", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7", "@babel/runtime@^7.9.2":
++"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.10.2", "@babel/runtime@^7.12.1", "@babel/runtime@^7.12.13", "@babel/runtime@^7.12.5", "@babel/runtime@^7.15.4", "@babel/runtime@^7.18.6", "@babel/runtime@^7.3.4", "@babel/runtime@^7.4.5", "@babel/runtime@^7.5.1", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7", "@babel/runtime@^7.9.2":
+   version "7.18.6"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/@babel/runtime/-/runtime-7.18.6.tgz#6a1ef59f838debd670421f8c7f2cbb8da9751580"
+   integrity sha1-ah71n4ON69ZwQh+Mfyy7jal1FYA=
+@@ -1304,6 +1304,11 @@
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/@csstools/normalize.css/-/normalize.css-10.1.0.tgz#f0950bba18819512d42f7197e56c518aa491cf18"
+   integrity sha1-8JULuhiBlRLUL3GX5WxRiqSRzxg=
+ 
++"@discoveryjs/json-ext@^0.5.0":
++  version "0.5.7"
++  resolved "https://registry.npmmirror.com/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz#1d572bfbbe14b7704e0ba0f39b74815b84870d70"
++  integrity sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==
++
+ "@eslint/eslintrc@^1.3.0":
+   version "1.3.0"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/@eslint/eslintrc/-/eslintrc-1.3.0.tgz#29f92c30bb3e771e4a2048c95fa6855392dfac4f"
+@@ -1531,7 +1536,7 @@
+     "@jridgewell/set-array" "^1.0.0"
+     "@jridgewell/sourcemap-codec" "^1.4.10"
+ 
+-"@jridgewell/gen-mapping@^0.3.2":
++"@jridgewell/gen-mapping@^0.3.0", "@jridgewell/gen-mapping@^0.3.2":
+   version "0.3.2"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/@jridgewell/gen-mapping/-/gen-mapping-0.3.2.tgz#c1aedc61e853f2bb9f5dfe6d4442d3b565b253b9"
+   integrity sha1-wa7cYehT8rufXf5tRELTtWWyU7k=
+@@ -1550,6 +1555,14 @@
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/@jridgewell/set-array/-/set-array-1.1.2.tgz#7c6cf998d6d20b914c0a55a91ae928ff25965e72"
+   integrity sha1-fGz5mNbSC5FMClWpGuko/yWWXnI=
+ 
++"@jridgewell/source-map@^0.3.2":
++  version "0.3.2"
++  resolved "https://registry.npmmirror.com/@jridgewell/source-map/-/source-map-0.3.2.tgz#f45351aaed4527a298512ec72f81040c998580fb"
++  integrity sha512-m7O9o2uR8k2ObDysZYzdfhb08VuEml5oWGiosa1VdaPZ/A6QyPkAJuwN0Q1lhULOf6B7MtQmHENS743hWtCrgw==
++  dependencies:
++    "@jridgewell/gen-mapping" "^0.3.0"
++    "@jridgewell/trace-mapping" "^0.3.9"
++
+ "@jridgewell/sourcemap-codec@^1.4.10":
+   version "1.4.14"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/@jridgewell/sourcemap-codec/-/sourcemap-codec-1.4.14.tgz#add4c98d341472a289190b424efbdb096991bb24"
+@@ -1563,7 +1576,7 @@
+     "@jridgewell/resolve-uri" "^3.0.3"
+     "@jridgewell/sourcemap-codec" "^1.4.10"
+ 
+-"@jridgewell/trace-mapping@^0.3.9":
++"@jridgewell/trace-mapping@^0.3.7", "@jridgewell/trace-mapping@^0.3.9":
+   version "0.3.14"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/@jridgewell/trace-mapping/-/trace-mapping-0.3.14.tgz#b231a081d8f66796e475ad588a1ef473112701ed"
+   integrity sha1-sjGggdj2Z5bkda1Yih70cxEnAe0=
+@@ -1849,16 +1862,37 @@
+   dependencies:
+     "@types/tern" "*"
+ 
++"@types/eslint-scope@^3.7.3":
++  version "3.7.4"
++  resolved "https://registry.npmmirror.com/@types/eslint-scope/-/eslint-scope-3.7.4.tgz#37fc1223f0786c39627068a12e94d6e6fc61de16"
++  integrity sha512-9K4zoImiZc3HlIp6AVUDE4CWYx22a+lhSZMYNpbjW04+YF0KWj4pJXnEMjdnFTiQibFFmElcsasJXDbdI/EPhA==
++  dependencies:
++    "@types/eslint" "*"
++    "@types/estree" "*"
++
+ "@types/eslint-visitor-keys@^1.0.0":
+   version "1.0.0"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/@types/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#1ee30d79544ca84d68d4b3cdb0af4f205663dd2d"
+   integrity sha1-HuMNeVRMqE1o1LPNsK9PIFZj3S0=
+ 
++"@types/eslint@*":
++  version "8.4.5"
++  resolved "https://registry.npmmirror.com/@types/eslint/-/eslint-8.4.5.tgz#acdfb7dd36b91cc5d812d7c093811a8f3d9b31e4"
++  integrity sha512-dhsC09y1gpJWnK+Ff4SGvCuSnk9DaU0BJZSzOwa6GVSg65XtTugLBITDAAzRU5duGBoXBHpdR/9jHGxJjNflJQ==
++  dependencies:
++    "@types/estree" "*"
++    "@types/json-schema" "*"
++
+ "@types/estree@*":
+   version "0.0.52"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/@types/estree/-/estree-0.0.52.tgz#7f1f57ad5b741f3d5b210d3b1f145640d89bf8fe"
+   integrity sha1-fx9XrVt0Hz1bIQ07HxRWQNib+P4=
+ 
++"@types/estree@^0.0.51":
++  version "0.0.51"
++  resolved "https://registry.npmmirror.com/@types/estree/-/estree-0.0.51.tgz#cfd70924a25a3fd32b218e5e420e6897e1ac4f40"
++  integrity sha512-CuPgU6f3eT/XgKKPqKd/gLZV1Xmvf1a2R5POBOGQa6uv82xpls89HU5zKeVoyR8XzHd1RGNOlQlvUe3CFkjWNQ==
++
+ "@types/glob@^7.1.1":
+   version "7.2.0"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/@types/glob/-/glob-7.2.0.tgz#bc1b5bf3aa92f25bd5dd39f35c57361bdce5b2eb"
+@@ -1875,6 +1909,11 @@
+     "@types/react" "*"
+     hoist-non-react-statics "^3.3.0"
+ 
++"@types/html-minifier-terser@^6.0.0":
++  version "6.1.0"
++  resolved "https://registry.npmmirror.com/@types/html-minifier-terser/-/html-minifier-terser-6.1.0.tgz#4fc33a00c1d0c16987b1a20cf92d20614c55ac35"
++  integrity sha512-oh/6byDPnL1zeNXFrDXFLyZjkr1MsBG667IM792caf1L2UPOOMf65NFzjUH/ltyfwjAGfs1rsX1eftK0jC/KIg==
++
+ "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0":
+   version "2.0.4"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/@types/istanbul-lib-coverage/-/istanbul-lib-coverage-2.0.4.tgz#8467d4b3c087805d63580480890791277ce35c44"
+@@ -1895,7 +1934,7 @@
+     "@types/istanbul-lib-coverage" "*"
+     "@types/istanbul-lib-report" "*"
+ 
+-"@types/json-schema@^7.0.3", "@types/json-schema@^7.0.5", "@types/json-schema@^7.0.9":
++"@types/json-schema@*", "@types/json-schema@^7.0.3", "@types/json-schema@^7.0.5", "@types/json-schema@^7.0.8", "@types/json-schema@^7.0.9":
+   version "7.0.11"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/@types/json-schema/-/json-schema-7.0.11.tgz#d421b6c527a3037f7c84433fd2c4229e016863d3"
+   integrity sha1-1CG2xSejA398hEM/0sQingFoY9M=
+@@ -2145,6 +2184,14 @@
+     "@typescript-eslint/types" "5.30.0"
+     eslint-visitor-keys "^3.3.0"
+ 
++"@webassemblyjs/ast@1.11.1":
++  version "1.11.1"
++  resolved "https://registry.npmmirror.com/@webassemblyjs/ast/-/ast-1.11.1.tgz#2bfd767eae1a6996f432ff7e8d7fc75679c0b6a7"
++  integrity sha512-ukBh14qFLjxTQNTXocdyksN5QdM28S1CxHt2rdskFyL+xFV7VremuBLVbmCePj+URalXBENx/9Lm7lnhihtCSw==
++  dependencies:
++    "@webassemblyjs/helper-numbers" "1.11.1"
++    "@webassemblyjs/helper-wasm-bytecode" "1.11.1"
++
+ "@webassemblyjs/ast@1.8.5":
+   version "1.8.5"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/@webassemblyjs/ast/-/ast-1.8.5.tgz#51b1c5fe6576a34953bf4b253df9f0d490d9e359"
+@@ -2154,16 +2201,31 @@
+     "@webassemblyjs/helper-wasm-bytecode" "1.8.5"
+     "@webassemblyjs/wast-parser" "1.8.5"
+ 
++"@webassemblyjs/floating-point-hex-parser@1.11.1":
++  version "1.11.1"
++  resolved "https://registry.npmmirror.com/@webassemblyjs/floating-point-hex-parser/-/floating-point-hex-parser-1.11.1.tgz#f6c61a705f0fd7a6aecaa4e8198f23d9dc179e4f"
++  integrity sha512-iGRfyc5Bq+NnNuX8b5hwBrRjzf0ocrJPI6GWFodBFzmFnyvrQ83SHKhmilCU/8Jv67i4GJZBMhEzltxzcNagtQ==
++
+ "@webassemblyjs/floating-point-hex-parser@1.8.5":
+   version "1.8.5"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/@webassemblyjs/floating-point-hex-parser/-/floating-point-hex-parser-1.8.5.tgz#1ba926a2923613edce496fd5b02e8ce8a5f49721"
+   integrity sha1-G6kmopI2E+3OSW/VsC6M6KX0lyE=
+ 
++"@webassemblyjs/helper-api-error@1.11.1":
++  version "1.11.1"
++  resolved "https://registry.npmmirror.com/@webassemblyjs/helper-api-error/-/helper-api-error-1.11.1.tgz#1a63192d8788e5c012800ba6a7a46c705288fd16"
++  integrity sha512-RlhS8CBCXfRUR/cwo2ho9bkheSXG0+NwooXcc3PAILALf2QLdFyj7KGsKRbVc95hZnhnERon4kW/D3SZpp6Tcg==
++
+ "@webassemblyjs/helper-api-error@1.8.5":
+   version "1.8.5"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/@webassemblyjs/helper-api-error/-/helper-api-error-1.8.5.tgz#c49dad22f645227c5edb610bdb9697f1aab721f7"
+   integrity sha1-xJ2tIvZFInxe22EL25aX8aq3Ifc=
+ 
++"@webassemblyjs/helper-buffer@1.11.1":
++  version "1.11.1"
++  resolved "https://registry.npmmirror.com/@webassemblyjs/helper-buffer/-/helper-buffer-1.11.1.tgz#832a900eb444884cde9a7cad467f81500f5e5ab5"
++  integrity sha512-gwikF65aDNeeXa8JxXa2BAk+REjSyhrNC9ZwdT0f8jc4dQQeDQ7G4m0f2QCLPJiMTTO6wfDmRmj/pW0PsUvIcA==
++
+ "@webassemblyjs/helper-buffer@1.8.5":
+   version "1.8.5"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/@webassemblyjs/helper-buffer/-/helper-buffer-1.8.5.tgz#fea93e429863dd5e4338555f42292385a653f204"
+@@ -2189,11 +2251,35 @@
+     "@webassemblyjs/ast" "1.8.5"
+     mamacro "^0.0.3"
+ 
++"@webassemblyjs/helper-numbers@1.11.1":
++  version "1.11.1"
++  resolved "https://registry.npmmirror.com/@webassemblyjs/helper-numbers/-/helper-numbers-1.11.1.tgz#64d81da219fbbba1e3bd1bfc74f6e8c4e10a62ae"
++  integrity sha512-vDkbxiB8zfnPdNK9Rajcey5C0w+QJugEglN0of+kmO8l7lDb77AnlKYQF7aarZuCrv+l0UvqL+68gSDr3k9LPQ==
++  dependencies:
++    "@webassemblyjs/floating-point-hex-parser" "1.11.1"
++    "@webassemblyjs/helper-api-error" "1.11.1"
++    "@xtuc/long" "4.2.2"
++
++"@webassemblyjs/helper-wasm-bytecode@1.11.1":
++  version "1.11.1"
++  resolved "https://registry.npmmirror.com/@webassemblyjs/helper-wasm-bytecode/-/helper-wasm-bytecode-1.11.1.tgz#f328241e41e7b199d0b20c18e88429c4433295e1"
++  integrity sha512-PvpoOGiJwXeTrSf/qfudJhwlvDQxFgelbMqtq52WWiXC6Xgg1IREdngmPN3bs4RoO83PnL/nFrxucXj1+BX62Q==
++
+ "@webassemblyjs/helper-wasm-bytecode@1.8.5":
+   version "1.8.5"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/@webassemblyjs/helper-wasm-bytecode/-/helper-wasm-bytecode-1.8.5.tgz#537a750eddf5c1e932f3744206551c91c1b93e61"
+   integrity sha1-U3p1Dt31weky83RCBlUckcG5PmE=
+ 
++"@webassemblyjs/helper-wasm-section@1.11.1":
++  version "1.11.1"
++  resolved "https://registry.npmmirror.com/@webassemblyjs/helper-wasm-section/-/helper-wasm-section-1.11.1.tgz#21ee065a7b635f319e738f0dd73bfbda281c097a"
++  integrity sha512-10P9No29rYX1j7F3EVPX3JvGPQPae+AomuSTPiF9eBQeChHI6iqjMIwR9JmOJXwpnn/oVGDk7I5IlskuMwU/pg==
++  dependencies:
++    "@webassemblyjs/ast" "1.11.1"
++    "@webassemblyjs/helper-buffer" "1.11.1"
++    "@webassemblyjs/helper-wasm-bytecode" "1.11.1"
++    "@webassemblyjs/wasm-gen" "1.11.1"
++
+ "@webassemblyjs/helper-wasm-section@1.8.5":
+   version "1.8.5"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/@webassemblyjs/helper-wasm-section/-/helper-wasm-section-1.8.5.tgz#74ca6a6bcbe19e50a3b6b462847e69503e6bfcbf"
+@@ -2204,6 +2290,13 @@
+     "@webassemblyjs/helper-wasm-bytecode" "1.8.5"
+     "@webassemblyjs/wasm-gen" "1.8.5"
+ 
++"@webassemblyjs/ieee754@1.11.1":
++  version "1.11.1"
++  resolved "https://registry.npmmirror.com/@webassemblyjs/ieee754/-/ieee754-1.11.1.tgz#963929e9bbd05709e7e12243a099180812992614"
++  integrity sha512-hJ87QIPtAMKbFq6CGTkZYJivEwZDbQUgYd3qKSadTNOhVY7p+gfP6Sr0lLRVTaG1JjFj+r3YchoqRYxNH3M0GQ==
++  dependencies:
++    "@xtuc/ieee754" "^1.2.0"
++
+ "@webassemblyjs/ieee754@1.8.5":
+   version "1.8.5"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/@webassemblyjs/ieee754/-/ieee754-1.8.5.tgz#712329dbef240f36bf57bd2f7b8fb9bf4154421e"
+@@ -2211,6 +2304,13 @@
+   dependencies:
+     "@xtuc/ieee754" "^1.2.0"
+ 
++"@webassemblyjs/leb128@1.11.1":
++  version "1.11.1"
++  resolved "https://registry.npmmirror.com/@webassemblyjs/leb128/-/leb128-1.11.1.tgz#ce814b45574e93d76bae1fb2644ab9cdd9527aa5"
++  integrity sha512-BJ2P0hNZ0u+Th1YZXJpzW6miwqQUGcIHT1G/sf72gLVD9DZ5AdYTqPNbHZh6K1M5VmKvFXwGSWZADz+qBWxeRw==
++  dependencies:
++    "@xtuc/long" "4.2.2"
++
+ "@webassemblyjs/leb128@1.8.5":
+   version "1.8.5"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/@webassemblyjs/leb128/-/leb128-1.8.5.tgz#044edeb34ea679f3e04cd4fd9824d5e35767ae10"
+@@ -2218,11 +2318,30 @@
+   dependencies:
+     "@xtuc/long" "4.2.2"
+ 
++"@webassemblyjs/utf8@1.11.1":
++  version "1.11.1"
++  resolved "https://registry.npmmirror.com/@webassemblyjs/utf8/-/utf8-1.11.1.tgz#d1f8b764369e7c6e6bae350e854dec9a59f0a3ff"
++  integrity sha512-9kqcxAEdMhiwQkHpkNiorZzqpGrodQQ2IGrHHxCy+Ozng0ofyMA0lTqiLkVs1uzTRejX+/O0EOT7KxqVPuXosQ==
++
+ "@webassemblyjs/utf8@1.8.5":
+   version "1.8.5"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/@webassemblyjs/utf8/-/utf8-1.8.5.tgz#a8bf3b5d8ffe986c7c1e373ccbdc2a0915f0cedc"
+   integrity sha1-qL87XY/+mGx8Hjc8y9wqCRXwztw=
+ 
++"@webassemblyjs/wasm-edit@1.11.1":
++  version "1.11.1"
++  resolved "https://registry.npmmirror.com/@webassemblyjs/wasm-edit/-/wasm-edit-1.11.1.tgz#ad206ebf4bf95a058ce9880a8c092c5dec8193d6"
++  integrity sha512-g+RsupUC1aTHfR8CDgnsVRVZFJqdkFHpsHMfJuWQzWU3tvnLC07UqHICfP+4XyL2tnr1amvl1Sdp06TnYCmVkA==
++  dependencies:
++    "@webassemblyjs/ast" "1.11.1"
++    "@webassemblyjs/helper-buffer" "1.11.1"
++    "@webassemblyjs/helper-wasm-bytecode" "1.11.1"
++    "@webassemblyjs/helper-wasm-section" "1.11.1"
++    "@webassemblyjs/wasm-gen" "1.11.1"
++    "@webassemblyjs/wasm-opt" "1.11.1"
++    "@webassemblyjs/wasm-parser" "1.11.1"
++    "@webassemblyjs/wast-printer" "1.11.1"
++
+ "@webassemblyjs/wasm-edit@1.8.5":
+   version "1.8.5"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/@webassemblyjs/wasm-edit/-/wasm-edit-1.8.5.tgz#962da12aa5acc1c131c81c4232991c82ce56e01a"
+@@ -2237,6 +2356,17 @@
+     "@webassemblyjs/wasm-parser" "1.8.5"
+     "@webassemblyjs/wast-printer" "1.8.5"
+ 
++"@webassemblyjs/wasm-gen@1.11.1":
++  version "1.11.1"
++  resolved "https://registry.npmmirror.com/@webassemblyjs/wasm-gen/-/wasm-gen-1.11.1.tgz#86c5ea304849759b7d88c47a32f4f039ae3c8f76"
++  integrity sha512-F7QqKXwwNlMmsulj6+O7r4mmtAlCWfO/0HdgOxSklZfQcDu0TpLiD1mRt/zF25Bk59FIjEuGAIyn5ei4yMfLhA==
++  dependencies:
++    "@webassemblyjs/ast" "1.11.1"
++    "@webassemblyjs/helper-wasm-bytecode" "1.11.1"
++    "@webassemblyjs/ieee754" "1.11.1"
++    "@webassemblyjs/leb128" "1.11.1"
++    "@webassemblyjs/utf8" "1.11.1"
++
+ "@webassemblyjs/wasm-gen@1.8.5":
+   version "1.8.5"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/@webassemblyjs/wasm-gen/-/wasm-gen-1.8.5.tgz#54840766c2c1002eb64ed1abe720aded714f98bc"
+@@ -2248,6 +2378,16 @@
+     "@webassemblyjs/leb128" "1.8.5"
+     "@webassemblyjs/utf8" "1.8.5"
+ 
++"@webassemblyjs/wasm-opt@1.11.1":
++  version "1.11.1"
++  resolved "https://registry.npmmirror.com/@webassemblyjs/wasm-opt/-/wasm-opt-1.11.1.tgz#657b4c2202f4cf3b345f8a4c6461c8c2418985f2"
++  integrity sha512-VqnkNqnZlU5EB64pp1l7hdm3hmQw7Vgqa0KF/KCNO9sIpI6Fk6brDEiX+iCOYrvMuBWDws0NkTOxYEb85XQHHw==
++  dependencies:
++    "@webassemblyjs/ast" "1.11.1"
++    "@webassemblyjs/helper-buffer" "1.11.1"
++    "@webassemblyjs/wasm-gen" "1.11.1"
++    "@webassemblyjs/wasm-parser" "1.11.1"
++
+ "@webassemblyjs/wasm-opt@1.8.5":
+   version "1.8.5"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/@webassemblyjs/wasm-opt/-/wasm-opt-1.8.5.tgz#b24d9f6ba50394af1349f510afa8ffcb8a63d264"
+@@ -2258,6 +2398,18 @@
+     "@webassemblyjs/wasm-gen" "1.8.5"
+     "@webassemblyjs/wasm-parser" "1.8.5"
+ 
++"@webassemblyjs/wasm-parser@1.11.1":
++  version "1.11.1"
++  resolved "https://registry.npmmirror.com/@webassemblyjs/wasm-parser/-/wasm-parser-1.11.1.tgz#86ca734534f417e9bd3c67c7a1c75d8be41fb199"
++  integrity sha512-rrBujw+dJu32gYB7/Lup6UhdkPx9S9SnobZzRVL7VcBH9Bt9bCBLEuX/YXOOtBsOZ4NQrRykKhffRWHvigQvOA==
++  dependencies:
++    "@webassemblyjs/ast" "1.11.1"
++    "@webassemblyjs/helper-api-error" "1.11.1"
++    "@webassemblyjs/helper-wasm-bytecode" "1.11.1"
++    "@webassemblyjs/ieee754" "1.11.1"
++    "@webassemblyjs/leb128" "1.11.1"
++    "@webassemblyjs/utf8" "1.11.1"
++
+ "@webassemblyjs/wasm-parser@1.8.5":
+   version "1.8.5"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/@webassemblyjs/wasm-parser/-/wasm-parser-1.8.5.tgz#21576f0ec88b91427357b8536383668ef7c66b8d"
+@@ -2282,6 +2434,14 @@
+     "@webassemblyjs/helper-fsm" "1.8.5"
+     "@xtuc/long" "4.2.2"
+ 
++"@webassemblyjs/wast-printer@1.11.1":
++  version "1.11.1"
++  resolved "https://registry.npmmirror.com/@webassemblyjs/wast-printer/-/wast-printer-1.11.1.tgz#d0c73beda8eec5426f10ae8ef55cee5e7084c2f0"
++  integrity sha512-IQboUWM4eKzWW+N/jij2sRatKMh99QEelo3Eb2q0qXkvPRISAj8Qxtmw5itwqK+TTkBuUIE45AxYPToqPtL5gg==
++  dependencies:
++    "@webassemblyjs/ast" "1.11.1"
++    "@xtuc/long" "4.2.2"
++
+ "@webassemblyjs/wast-printer@1.8.5":
+   version "1.8.5"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/@webassemblyjs/wast-printer/-/wast-printer-1.8.5.tgz#114bbc481fd10ca0e23b3560fa812748b0bae5bc"
+@@ -2291,6 +2451,23 @@
+     "@webassemblyjs/wast-parser" "1.8.5"
+     "@xtuc/long" "4.2.2"
+ 
++"@webpack-cli/configtest@^1.2.0":
++  version "1.2.0"
++  resolved "https://registry.npmmirror.com/@webpack-cli/configtest/-/configtest-1.2.0.tgz#7b20ce1c12533912c3b217ea68262365fa29a6f5"
++  integrity sha512-4FB8Tj6xyVkyqjj1OaTqCjXYULB9FMkqQ8yGrZjRDrYh0nOE+7Lhs45WioWQQMV+ceFlE368Ukhe6xdvJM9Egg==
++
++"@webpack-cli/info@^1.5.0":
++  version "1.5.0"
++  resolved "https://registry.npmmirror.com/@webpack-cli/info/-/info-1.5.0.tgz#6c78c13c5874852d6e2dd17f08a41f3fe4c261b1"
++  integrity sha512-e8tSXZpw2hPl2uMJY6fsMswaok5FdlGNRTktvFk2sD8RjH0hE2+XistawJx1vmKteh4NmGmNUrp+Tb2w+udPcQ==
++  dependencies:
++    envinfo "^7.7.3"
++
++"@webpack-cli/serve@^1.7.0":
++  version "1.7.0"
++  resolved "https://registry.npmmirror.com/@webpack-cli/serve/-/serve-1.7.0.tgz#e1993689ac42d2b16e9194376cfb6753f6254db1"
++  integrity sha512-oxnCNGj88fL+xzV+dacXs44HcDwf1ovs3AuEzvP7mqXw7fQntqIhQ1BRmynh4qEKQSSSRSWVyXRjmTbZIX9V2Q==
++
+ "@xtuc/ieee754@^1.2.0":
+   version "1.2.0"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/@xtuc/ieee754/-/ieee754-1.2.0.tgz#eef014a3145ae477a1cbc00cd1e552336dceb790"
+@@ -2322,6 +2499,11 @@
+     acorn "^6.0.1"
+     acorn-walk "^6.0.1"
+ 
++acorn-import-assertions@^1.7.6:
++  version "1.8.0"
++  resolved "https://registry.npmmirror.com/acorn-import-assertions/-/acorn-import-assertions-1.8.0.tgz#ba2b5939ce62c238db6d93d81c9b111b29b855e9"
++  integrity sha512-m7VZ3jwz4eK6A4Vtt8Ew1/mNbP24u0FhdyfA7fSvnJR6LMdfOYnmuIrrJAgrYfYJ10F/otaHTtrtrtmHdMNzEw==
++
+ acorn-jsx@^5.2.0, acorn-jsx@^5.3.2:
+   version "5.3.2"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/acorn-jsx/-/acorn-jsx-5.3.2.tgz#7ed5bb55908b3b2f1bc55c6af1653bada7f07937"
+@@ -2352,7 +2534,7 @@
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/acorn/-/acorn-7.4.1.tgz#feaed255973d2e77555b83dbc08851a6c63520fa"
+   integrity sha1-/q7SVZc9LndVW4PbwIhRpsY1IPo=
+ 
+-acorn@^8.4.1, acorn@^8.7.1:
++acorn@^8.4.1, acorn@^8.5.0, acorn@^8.7.1:
+   version "8.7.1"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/acorn/-/acorn-8.7.1.tgz#0197122c843d1bf6d0a5e83220a788f278f63c30"
+   integrity sha1-AZcSLIQ9G/bQpegyIKeI8nj2PDA=
+@@ -2421,7 +2603,7 @@
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/ajv-keywords/-/ajv-keywords-3.5.2.tgz#31f29da5ab6e00d1c2d329acf7b5929614d5014d"
+   integrity sha1-MfKdpatuANHC0yms97WSlhTVAU0=
+ 
+-ajv@^6.1.0, ajv@^6.10.0, ajv@^6.10.2, ajv@^6.12.3, ajv@^6.12.4:
++ajv@^6.1.0, ajv@^6.10.0, ajv@^6.10.2, ajv@^6.12.3, ajv@^6.12.4, ajv@^6.12.5:
+   version "6.12.6"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/ajv/-/ajv-6.12.6.tgz#baf5a62e802b07d977034586f8c3baf5adf26df4"
+   integrity sha1-uvWmLoArB9l3A0WG+MO69a3ybfQ=
+@@ -2446,6 +2628,11 @@
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/alphanum-sort/-/alphanum-sort-1.0.2.tgz#97a1119649b211ad33691d9f9f486a8ec9fbe0a3"
+   integrity sha1-l6ERlkmyEa0zaR2fn0hqjsn74KM=
+ 
++amdefine@>=0.0.4:
++  version "1.0.1"
++  resolved "https://registry.npmmirror.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
++  integrity sha512-S2Hw0TtNkMJhIabBwIojKL9YHO5T0n5eNqWJ7Lrlel/zDbftQpxpapi8tZs3X1HWa+u+QeydGmzzNU0m09+Rcg==
++
+ ansi-colors@^3.0.0:
+   version "3.2.4"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/ansi-colors/-/ansi-colors-3.2.4.tgz#e3a3da4bfbae6c86a9c285625de124a234026fbf"
+@@ -2740,6 +2927,11 @@
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/arrify/-/arrify-1.0.1.tgz#898508da2226f380df904728456849c1501a4b0d"
+   integrity sha1-iYUI2iIm84DfkEcoRWhJwVAaSw0=
+ 
++asap@~1.0.0:
++  version "1.0.0"
++  resolved "https://registry.npmmirror.com/asap/-/asap-1.0.0.tgz#b2a45da5fdfa20b0496fc3768cc27c12fa916a7d"
++  integrity sha512-Ej9qjcXY+8Tuy1cNqiwNMwFRXOy9UwgTeMA8LxreodygIPV48lx8PU1ecFxb5ZeU1DpMKxiq6vGLTxcitWZPbA==
++
+ asap@~2.0.3, asap@~2.0.6:
+   version "2.0.6"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/asap/-/asap-2.0.6.tgz#e50347611d7e690943208bbdafebcbc2fb866d46"
+@@ -2916,6 +3108,16 @@
+     pify "^4.0.1"
+     schema-utils "^2.6.5"
+ 
++babel-loader@^8.2.5:
++  version "8.2.5"
++  resolved "https://registry.npmmirror.com/babel-loader/-/babel-loader-8.2.5.tgz#d45f585e654d5a5d90f5350a779d7647c5ed512e"
++  integrity sha512-OSiFfH89LrEMiWd4pLNqGz4CwJDtbs2ZVc+iGu2HrkRfPxId9F2anQj38IxWpmRfsUY0aBZYi1EFcd3mhtRMLQ==
++  dependencies:
++    find-cache-dir "^3.3.1"
++    loader-utils "^2.0.0"
++    make-dir "^3.1.0"
++    schema-utils "^2.6.5"
++
+ babel-plugin-dynamic-import-node@^2.3.3:
+   version "2.3.3"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/babel-plugin-dynamic-import-node/-/babel-plugin-dynamic-import-node-2.3.3.tgz#84fda19c976ec5c6defef57f9427b3def66e17a3"
+@@ -3271,7 +3473,7 @@
+     node-releases "^1.1.52"
+     pkg-up "^3.1.0"
+ 
+-browserslist@^4.0.0, browserslist@^4.12.0, browserslist@^4.20.2, browserslist@^4.21.0, browserslist@^4.6.2, browserslist@^4.6.4, browserslist@^4.9.1:
++browserslist@^4.0.0, browserslist@^4.12.0, browserslist@^4.14.5, browserslist@^4.20.2, browserslist@^4.21.0, browserslist@^4.6.2, browserslist@^4.6.4, browserslist@^4.9.1:
+   version "4.21.1"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/browserslist/-/browserslist-4.21.1.tgz#c9b9b0a54c7607e8dc3e01a0d311727188011a00"
+   integrity sha1-ybmwpUx2B+jcPgGg0xFycYgBGgA=
+@@ -3436,7 +3638,7 @@
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/callsites/-/callsites-3.1.0.tgz#b3630abd8943432f54b3f0519238e33cd7df2f73"
+   integrity sha1-s2MKvYlDQy9Us/BRkjjjPNffL3M=
+ 
+-camel-case@^4.1.1:
++camel-case@^4.1.1, camel-case@^4.1.2:
+   version "4.1.2"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/camel-case/-/camel-case-4.1.2.tgz#9728072a954f805228225a6deea6b38461e1bd5a"
+   integrity sha1-lygHKpVPgFIoIlpt7qazhGHhvVo=
+@@ -3619,11 +3821,25 @@
+   dependencies:
+     source-map "~0.6.0"
+ 
++clean-css@^5.2.2:
++  version "5.3.0"
++  resolved "https://registry.npmmirror.com/clean-css/-/clean-css-5.3.0.tgz#ad3d8238d5f3549e83d5f87205189494bc7cbb59"
++  integrity sha512-YYuuxv4H/iNb1Z/5IbMRoxgrzjWGhOEFfd+groZ5dMCVkpENiMZmwspdrzBo9286JjM1gZJPAyL7ZIdzuvu2AQ==
++  dependencies:
++    source-map "~0.6.0"
++
+ clean-stack@^2.0.0:
+   version "2.2.0"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/clean-stack/-/clean-stack-2.2.0.tgz#ee8472dbb129e727b31e8a10a427dee9dfe4008b"
+   integrity sha1-7oRy27Ep5yezHooQpCfe6d/kAIs=
+ 
++clean-webpack-plugin@^4.0.0:
++  version "4.0.0"
++  resolved "https://registry.npmmirror.com/clean-webpack-plugin/-/clean-webpack-plugin-4.0.0.tgz#72947d4403d452f38ed61a9ff0ada8122aacd729"
++  integrity sha512-WuWE1nyTNAyW5T7oNyys2EN0cfP2fdRxhxnIQWiAp0bMabPdHhoGxM8A6YL2GhqwgrPnnaemVE7nv5XJ2Fhh2w==
++  dependencies:
++    del "^4.1.1"
++
+ cli-cursor@^2.1.0:
+   version "2.1.0"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/cli-cursor/-/cli-cursor-2.1.0.tgz#b35dac376479facc3e94747d41d0d0f5238ffcb5"
+@@ -3695,11 +3911,6 @@
+     kind-of "^6.0.2"
+     shallow-clone "^3.0.0"
+ 
+-clone@^2.1.1:
+-  version "2.1.2"
+-  resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/clone/-/clone-2.1.2.tgz#1b7f4b9f591f1e8f83670401600345a02887435f"
+-  integrity sha1-G39Ln1kfHo+DZwQBYANFoCiHQ18=
+-
+ co@^4.6.0:
+   version "4.6.0"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/co/-/co-4.6.0.tgz#6ea6bdf3d853ae54ccb8e47bfa0bf3f9031fb184"
+@@ -3780,6 +3991,11 @@
+     color-convert "^1.9.3"
+     color-string "^1.6.0"
+ 
++colorette@^2.0.14:
++  version "2.0.19"
++  resolved "https://registry.npmmirror.com/colorette/-/colorette-2.0.19.tgz#cdf044f47ad41a0f4b56b3a0d5b4e6e1a2d5a798"
++  integrity sha512-3tlv/dIP7FWvj3BsbHrGLJ6l/oKh1O3TcgBqMn+yyCagOxc23fyzDS6HypQbgxWbkpDnf52p1LuR4eWDQ/K9WQ==
++
+ combined-stream@^1.0.6, combined-stream@~1.0.6:
+   version "1.0.8"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/combined-stream/-/combined-stream-1.0.8.tgz#c3d45a8b34fd730631a110a8a2520682b31d5a7f"
+@@ -3802,6 +4018,16 @@
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/commander/-/commander-4.1.1.tgz#9fd602bd936294e9e9ef46a3f4d6964044b18068"
+   integrity sha1-n9YCvZNilOnp70aj9NaWQESxgGg=
+ 
++commander@^7.0.0:
++  version "7.2.0"
++  resolved "https://registry.npmmirror.com/commander/-/commander-7.2.0.tgz#a36cb57d0b501ce108e4d20559a150a391d97ab7"
++  integrity sha512-QrWXB+ZQSVPmIWIhtEO9H+gwHaMGYiF5ChvoJ+K9ZGHG/sVsa6yiesAD1GC/x46sET00Xlwo1u49RVVVzvcSkw==
++
++commander@^8.3.0:
++  version "8.3.0"
++  resolved "https://registry.npmmirror.com/commander/-/commander-8.3.0.tgz#4837ea1b2da67b9c616a67afbb0fafee567bca66"
++  integrity sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww==
++
+ commander@~2.14.1:
+   version "2.14.1"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/commander/-/commander-2.14.1.tgz#2235123e37af8ca3c65df45b026dbd357b01b9aa"
+@@ -3972,13 +4198,6 @@
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/cookie/-/cookie-0.5.0.tgz#d1f5d71adec6558c58f389987c366aa47e994f8b"
+   integrity sha1-0fXXGt7GVYxY84mYfDZqpH6ZT4s=
+ 
+-copy-anything@^2.0.1:
+-  version "2.0.6"
+-  resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/copy-anything/-/copy-anything-2.0.6.tgz#092454ea9584a7b7ad5573062b2a87f5900fc480"
+-  integrity sha1-CSRU6pWEp7etVXMGKyqH9ZAPxIA=
+-  dependencies:
+-    is-what "^3.14.1"
+-
+ copy-concurrently@^1.0.0:
+   version "1.0.5"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/copy-concurrently/-/copy-concurrently-1.0.5.tgz#92297398cae34937fcafd6ec8139c18051f0b5e0"
+@@ -4162,7 +4381,7 @@
+     shebang-command "^1.2.0"
+     which "^1.2.9"
+ 
+-cross-spawn@^7.0.2:
++cross-spawn@^7.0.2, cross-spawn@^7.0.3:
+   version "7.0.3"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/cross-spawn/-/cross-spawn-7.0.3.tgz#f73a85b9d5d41d045551c177e2882d4ac85728a6"
+   integrity sha1-9zqFudXUHQRVUcF34ogtSshXKKY=
+@@ -4249,6 +4468,20 @@
+     postcss-value-parser "^4.0.2"
+     schema-utils "^2.6.0"
+ 
++css-loader@^6.7.1:
++  version "6.7.1"
++  resolved "https://registry.npmmirror.com/css-loader/-/css-loader-6.7.1.tgz#e98106f154f6e1baf3fc3bc455cb9981c1d5fd2e"
++  integrity sha512-yB5CNFa14MbPJcomwNh3wLThtkZgcNyI2bNMRt8iE5Z8Vwl7f8vQXFAzn2HDOJvtDq2NTZBUGMSUNNyrv3/+cw==
++  dependencies:
++    icss-utils "^5.1.0"
++    postcss "^8.4.7"
++    postcss-modules-extract-imports "^3.0.0"
++    postcss-modules-local-by-default "^4.0.0"
++    postcss-modules-scope "^3.0.0"
++    postcss-modules-values "^4.0.0"
++    postcss-value-parser "^4.2.0"
++    semver "^7.3.5"
++
+ css-prefers-color-scheme@^3.1.1:
+   version "3.1.1"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/css-prefers-color-scheme/-/css-prefers-color-scheme-3.1.1.tgz#6f830a2714199d4f0d0d0bb8a27916ed65cff1f4"
+@@ -5030,6 +5263,14 @@
+     memory-fs "^0.5.0"
+     tapable "^1.0.0"
+ 
++enhanced-resolve@^5.9.3:
++  version "5.10.0"
++  resolved "https://registry.npmmirror.com/enhanced-resolve/-/enhanced-resolve-5.10.0.tgz#0dc579c3bb2a1032e357ac45b8f3a6f3ad4fb1e6"
++  integrity sha512-T0yTFjdpldGY8PmuXXR0PyQ1ufZpEGiHVrp7zHKB7jdR4qlmZHhONVM5AQOAWXuF/w3dnHbEQVrNptJgt7F+cQ==
++  dependencies:
++    graceful-fs "^4.2.4"
++    tapable "^2.2.0"
++
+ enquire.js@^2.1.6:
+   version "2.1.6"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/enquire.js/-/enquire.js-2.1.6.tgz#3e8780c9b8b835084c3f60e166dbc3c2a3c89814"
+@@ -5040,6 +5281,11 @@
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/entities/-/entities-2.2.0.tgz#098dc90ebb83d8dffa089d55256b351d34c4da55"
+   integrity sha1-CY3JDruD2N/6CJ1VJWs1HTTE2lU=
+ 
++envinfo@^7.7.3:
++  version "7.8.1"
++  resolved "https://registry.npmmirror.com/envinfo/-/envinfo-7.8.1.tgz#06377e3e5f4d379fea7ac592d5ad8927e0c4d475"
++  integrity sha512-/o+BXHmB7ocbHEAs6F2EnG0ogybVVUdkRunTT2glZU9XAaGmhqskrvKwqXuDfNjEO0LZKWdejEEpnq8aM0tOaw==
++
+ errno@^0.1.1, errno@^0.1.3, errno@~0.1.7:
+   version "0.1.8"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/errno/-/errno-0.1.8.tgz#8bb3e9c7d463be4976ff888f76b4809ebc2e811f"
+@@ -5054,6 +5300,13 @@
+   dependencies:
+     is-arrayish "^0.2.1"
+ 
++error-stack-parser@^2.0.0:
++  version "2.1.4"
++  resolved "https://registry.npmmirror.com/error-stack-parser/-/error-stack-parser-2.1.4.tgz#229cb01cdbfa84440bfa91876285b94680188286"
++  integrity sha512-Sk5V6wVazPhq5MhpO+AUxJn5x7XSXGl1R93Vn7i+zS15KDVxQijejNCrz8340/2bgLBjR9GtEG8ZVKONDjcqGQ==
++  dependencies:
++    stackframe "^1.3.4"
++
+ es-abstract@^1.17.2, es-abstract@^1.19.0, es-abstract@^1.19.1, es-abstract@^1.19.2, es-abstract@^1.19.5, es-abstract@^1.20.1:
+   version "1.20.1"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/es-abstract/-/es-abstract-1.20.1.tgz#027292cd6ef44bd12b1913b828116f54787d1814"
+@@ -5088,6 +5341,11 @@
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/es-array-method-boxes-properly/-/es-array-method-boxes-properly-1.0.0.tgz#873f3e84418de4ee19c5be752990b2e44718d09e"
+   integrity sha1-hz8+hEGN5O4Zxb51KZCy5EcY0J4=
+ 
++es-module-lexer@^0.9.0:
++  version "0.9.3"
++  resolved "https://registry.npmmirror.com/es-module-lexer/-/es-module-lexer-0.9.3.tgz#6f13db00cc38417137daf74366f535c8eb438f19"
++  integrity sha512-1HQ2M2sPtxwnvOvT1ZClHyQDiggdNjURWpY2we6aMKCQiUVxTmVs2UYPLIrD84sS+kMdUwfBSylbJPwNnBrnHQ==
++
+ es-shim-unscopables@^1.0.0:
+   version "1.0.0"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/es-shim-unscopables/-/es-shim-unscopables-1.0.0.tgz#702e632193201e3edf8713635d083d378e510241"
+@@ -5335,6 +5593,14 @@
+     semver "^6.3.0"
+     string.prototype.matchall "^4.0.7"
+ 
++eslint-scope@5.1.1, eslint-scope@^5.0.0, eslint-scope@^5.1.1:
++  version "5.1.1"
++  resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/eslint-scope/-/eslint-scope-5.1.1.tgz#e786e59a66cb92b3f6c1fb0d508aab174848f48c"
++  integrity sha1-54blmmbLkrP2wfsNUIqrF0hI9Iw=
++  dependencies:
++    esrecurse "^4.3.0"
++    estraverse "^4.1.1"
++
+ eslint-scope@^4.0.3:
+   version "4.0.3"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/eslint-scope/-/eslint-scope-4.0.3.tgz#ca03833310f6889a3264781aa82e63eb9cfe7848"
+@@ -5342,14 +5608,6 @@
+   dependencies:
+     esrecurse "^4.1.0"
+     estraverse "^4.1.1"
+-
+-eslint-scope@^5.0.0, eslint-scope@^5.1.1:
+-  version "5.1.1"
+-  resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/eslint-scope/-/eslint-scope-5.1.1.tgz#e786e59a66cb92b3f6c1fb0d508aab174848f48c"
+-  integrity sha1-54blmmbLkrP2wfsNUIqrF0hI9Iw=
+-  dependencies:
+-    esrecurse "^4.3.0"
+-    estraverse "^4.1.1"
+ 
+ eslint-scope@^7.1.1:
+   version "7.1.1"
+@@ -5546,7 +5804,7 @@
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/eventlistener/-/eventlistener-0.0.1.tgz#ed2baabb852227af2bcf889152c72c63ca532eb8"
+   integrity sha1-7Suqu4UiJ68rz4iRUscsY8pTLrg=
+ 
+-events@^3.0.0:
++events@^3.0.0, events@^3.2.0:
+   version "3.3.0"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/events/-/events-3.3.0.tgz#31a95ad0a924e2d2c419a813aeb2c4e878ea7400"
+   integrity sha1-Mala0Kkk4tLEGagTrrLE6HjqdAA=
+@@ -5759,6 +6017,11 @@
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
+   integrity sha1-PYpcZog6FqMMqGQ+hR8Zuqd5eRc=
+ 
++fastest-levenshtein@^1.0.12:
++  version "1.0.12"
++  resolved "https://registry.npmmirror.com/fastest-levenshtein/-/fastest-levenshtein-1.0.12.tgz#9990f7d3a88cc5a9ffd1f1745745251700d497e2"
++  integrity sha512-On2N+BpYJ15xIC974QNVuYGMOlEVt4s0EOI3wwMqOmK1fdDY+FN/zltPV8vosq4ad4c/gJ1KHScUn/6AWIgiow==
++
+ fastq@^1.6.0:
+   version "1.13.0"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/fastq/-/fastq-1.13.0.tgz#616760f88a7526bdfc596b7cab8c18938c36b98c"
+@@ -5928,7 +6191,7 @@
+     make-dir "^2.0.0"
+     pkg-dir "^3.0.0"
+ 
+-find-cache-dir@^3.2.0:
++find-cache-dir@^3.2.0, find-cache-dir@^3.3.1:
+   version "3.3.2"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/find-cache-dir/-/find-cache-dir-3.3.2.tgz#b30c5b6eff0730731aea9bbd9dbecbd80256d64b"
+   integrity sha1-swxbbv8HMHMa6pu9nb7L2AJW1ks=
+@@ -6116,6 +6379,15 @@
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/fresh/-/fresh-0.5.2.tgz#3d8cadd90d976569fa835ab1f8e4b23a105605a7"
+   integrity sha1-PYyt2Q2XZWn6g1qx+OSyOhBWBac=
+ 
++friendly-errors-webpack-plugin@^1.7.0:
++  version "1.7.0"
++  resolved "https://registry.npmmirror.com/friendly-errors-webpack-plugin/-/friendly-errors-webpack-plugin-1.7.0.tgz#efc86cbb816224565861a1be7a9d84d0aafea136"
++  integrity sha512-K27M3VK30wVoOarP651zDmb93R9zF28usW4ocaK3mfQeIEI5BPht/EzZs5E8QLLwbLRJQMwscAjDxYPb1FuNiw==
++  dependencies:
++    chalk "^1.1.3"
++    error-stack-parser "^2.0.0"
++    string-width "^2.0.0"
++
+ from2@^2.1.0:
+   version "2.3.0"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/from2/-/from2-2.3.0.tgz#8bfb5502bde4a4d36cfdeea007fcca21d7e382af"
+@@ -6299,6 +6571,11 @@
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/glob-to-regexp/-/glob-to-regexp-0.3.0.tgz#8c5a1494d2066c570cc3bfe4496175acc4d502ab"
+   integrity sha1-jFoUlNIGbFcMw7/kSWF1rMTVAqs=
+ 
++glob-to-regexp@^0.4.1:
++  version "0.4.1"
++  resolved "https://registry.npmmirror.com/glob-to-regexp/-/glob-to-regexp-0.4.1.tgz#c75297087c851b9a578bd217dd59a92f59fe546e"
++  integrity sha512-lkX1HJXwyMcprw/5YUZc2s7DrpAiHB21/V+E1rHUrVNokkvB6bqMzT0VfV6/86ZNabt1k14YOIaT7nDvOX3Iiw==
++
+ glob@7.1.4:
+   version "7.1.4"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/glob/-/glob-7.1.4.tgz#aa608a2f6c577ad357e1ae5a5c26d9a8d1969255"
+@@ -6428,7 +6705,14 @@
+   dependencies:
+     delegate "^3.1.2"
+ 
+-graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.2:
++graceful-fs@^3.0.5:
++  version "3.0.12"
++  resolved "https://registry.npmmirror.com/graceful-fs/-/graceful-fs-3.0.12.tgz#0034947ce9ed695ec8ab0b854bc919e82b1ffaef"
++  integrity sha512-J55gaCS4iTTJfTXIxSVw3EMQckcqkpdRv3IR7gu6sq0+tbC363Zx6KH/SEwXASK9JRbhyZmVjJEVJIOxYsB3Qg==
++  dependencies:
++    natives "^1.1.3"
++
++graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.2, graceful-fs@^4.2.4, graceful-fs@^4.2.9:
+   version "4.2.10"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/graceful-fs/-/graceful-fs-4.2.10.tgz#147d3a006da4ca3ce14728c7aefc287c367d7a6c"
+   integrity sha1-FH06AG2kyjzhRyjHrvwofDZ9emw=
+@@ -6680,6 +6964,19 @@
+     relateurl "^0.2.7"
+     terser "^4.6.3"
+ 
++html-minifier-terser@^6.0.2:
++  version "6.1.0"
++  resolved "https://registry.npmmirror.com/html-minifier-terser/-/html-minifier-terser-6.1.0.tgz#bfc818934cc07918f6b3669f5774ecdfd48f32ab"
++  integrity sha512-YXxSlJBZTP7RS3tWnQw74ooKa6L9b9i9QYXY21eUEvhZ3u9XLfv6OnFsQq6RxkhHygsaUMvYsZRV5rU/OVNZxw==
++  dependencies:
++    camel-case "^4.1.2"
++    clean-css "^5.2.2"
++    commander "^8.3.0"
++    he "^1.2.0"
++    param-case "^3.0.4"
++    relateurl "^0.2.7"
++    terser "^5.10.0"
++
+ html-to-draftjs@^1.5.0:
+   version "1.5.0"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/html-to-draftjs/-/html-to-draftjs-1.5.0.tgz#0df0eabf429deaedb63f5c859889e2c983606e86"
+@@ -6697,6 +6994,17 @@
+     tapable "^1.1.3"
+     util.promisify "1.0.0"
+ 
++html-webpack-plugin@^5.5.0:
++  version "5.5.0"
++  resolved "https://registry.npmmirror.com/html-webpack-plugin/-/html-webpack-plugin-5.5.0.tgz#c3911936f57681c1f9f4d8b68c158cd9dfe52f50"
++  integrity sha512-sy88PC2cRTVxvETRgUHFrL4No3UxvcH8G1NepGhqaTT+GXN2kTamqasot0inS5hXeg1cMbFDt27zzo9p35lZVw==
++  dependencies:
++    "@types/html-minifier-terser" "^6.0.0"
++    html-minifier-terser "^6.0.2"
++    lodash "^4.17.21"
++    pretty-error "^4.0.0"
++    tapable "^2.0.0"
++
+ htmlparser2@^6.1.0:
+   version "6.1.0"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/htmlparser2/-/htmlparser2-6.1.0.tgz#c4d762b6c3371a05dbe65e94ae43a9f845fb8fb7"
+@@ -6792,6 +7100,11 @@
+   dependencies:
+     postcss "^7.0.14"
+ 
++icss-utils@^5.0.0, icss-utils@^5.1.0:
++  version "5.1.0"
++  resolved "https://registry.npmmirror.com/icss-utils/-/icss-utils-5.1.0.tgz#c6be6858abd013d768e98366ae47e25d5887b1ae"
++  integrity sha512-soFhflCVWLfRNOPU3iv5Z9VUdT44xFRbzjLsEzSr5AQmgqPMTHdU3PMT1Cf1ssx8fLNJDA1juftYl+PUcv3MqA==
++
+ identity-obj-proxy@3.0.0:
+   version "3.0.0"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/identity-obj-proxy/-/identity-obj-proxy-3.0.0.tgz#94d2bda96084453ef36fbc5aaec37e0f79f1fc14"
+@@ -6824,10 +7137,10 @@
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/ignore/-/ignore-5.2.0.tgz#6d3bac8fa7fe0d45d9f9be7bac2fc279577e345a"
+   integrity sha1-bTusj6f+DUXZ+b57rC/CeVd+NFo=
+ 
+-image-size@~0.5.0:
+-  version "0.5.5"
+-  resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/image-size/-/image-size-0.5.5.tgz#09dfd4ab9d20e29eb1c3e80b8990378df9e3cb9c"
+-  integrity sha1-Cd/Uq50g4p6xw+gLiZA3jfnjy5w=
++image-size@~0.3.5:
++  version "0.3.5"
++  resolved "https://registry.npmmirror.com/image-size/-/image-size-0.3.5.tgz#83240eab2fb5b00b04aab8c74b0471e9cba7ad8c"
++  integrity sha512-naH1FVkLBoWjY1ljAzPbITSiZC4mk4+nNonkMncF1kulHn9wLxNOMJ54LG9M86oqbSRNW60IARHR/E/lZBBC9g==
+ 
+ immediate@~3.0.5:
+   version "3.0.6"
+@@ -6887,6 +7200,14 @@
+     pkg-dir "^3.0.0"
+     resolve-cwd "^2.0.0"
+ 
++import-local@^3.0.2:
++  version "3.1.0"
++  resolved "https://registry.npmmirror.com/import-local/-/import-local-3.1.0.tgz#b4479df8a5fd44f6cdce24070675676063c95cb4"
++  integrity sha512-ASB07uLtnDs1o6EHjKpX34BKYDSqnFerfTOJL2HvMqF70LnxpjkzDB8J44oT9pu4AMPkQwf8jl6szgvNd2tRIg==
++  dependencies:
++    pkg-dir "^4.2.0"
++    resolve-cwd "^3.0.0"
++
+ imurmurhash@^0.1.4:
+   version "0.1.4"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
+@@ -7009,6 +7330,11 @@
+     has "^1.0.3"
+     side-channel "^1.0.4"
+ 
++interpret@^2.2.0:
++  version "2.2.0"
++  resolved "https://registry.npmmirror.com/interpret/-/interpret-2.2.0.tgz#1a78a0b5965c40a5416d007ad6f50ad27c417df9"
++  integrity sha512-Ju0Bz/cEia55xDwUWEa8+olFpCiQoypjnQySseKtmjNrnps3P+xfpUmGr90T7yjlVJmOtybRvPXhKMbHr+fWnw==
++
+ invariant@^2.2.2, invariant@^2.2.4:
+   version "2.2.4"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
+@@ -7381,11 +7707,6 @@
+   dependencies:
+     call-bind "^1.0.2"
+ 
+-is-what@^3.14.1:
+-  version "3.14.1"
+-  resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/is-what/-/is-what-3.14.1.tgz#e1222f46ddda85dead0fd1c9df131760e77755c1"
+-  integrity sha1-4SIvRt3ahd6tD9HJ3xMXYOd3VcE=
+-
+ is-windows@^1.0.1, is-windows@^1.0.2:
+   version "1.0.2"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/is-windows/-/is-windows-1.0.2.tgz#d1850eb9791ecd18e6182ce12a30f396634bb19d"
+@@ -7867,6 +8188,15 @@
+     merge-stream "^2.0.0"
+     supports-color "^7.0.0"
+ 
++jest-worker@^27.4.5:
++  version "27.5.1"
++  resolved "https://registry.npmmirror.com/jest-worker/-/jest-worker-27.5.1.tgz#8d146f0900e8973b106b6f73cc1e9a8cb86f8db0"
++  integrity sha512-7vuh85V5cdDofPyxn58nrPjBktZo0u9x1g8WtjQol+jZDaE+fhN+cIvTj11GndBnMnyfrUOG1sZQxCdjKh+DKg==
++  dependencies:
++    "@types/node" "*"
++    merge-stream "^2.0.0"
++    supports-color "^8.0.0"
++
+ jest@24.9.0:
+   version "24.9.0"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/jest/-/jest-24.9.0.tgz#987d290c05a08b52c56188c1002e368edb007171"
+@@ -7989,7 +8319,7 @@
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/json-parse-better-errors/-/json-parse-better-errors-1.0.2.tgz#bb867cfb3450e69107c131d1c514bab3dc8bcaa9"
+   integrity sha1-u4Z8+zRQ5pEHwTHRxRS6s9yLyqk=
+ 
+-json-parse-even-better-errors@^2.3.0:
++json-parse-even-better-errors@^2.3.0, json-parse-even-better-errors@^2.3.1:
+   version "2.3.1"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/json-parse-even-better-errors/-/json-parse-even-better-errors-2.3.1.tgz#7c47805a94319928e05777405dc12e1f7a4ee02d"
+   integrity sha1-fEeAWpQxmSjgV3dAXcEuH3pO4C0=
+@@ -8169,30 +8499,27 @@
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/left-pad/-/left-pad-1.3.0.tgz#5b8a3a7765dfe001261dde915589e782f8c94d1e"
+   integrity sha1-W4o6d2Xf4AEmHd6RVYnngvjJTR4=
+ 
+-less-loader@^5.0.0:
+-  version "5.0.0"
+-  resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/less-loader/-/less-loader-5.0.0.tgz#498dde3a6c6c4f887458ee9ed3f086a12ad1b466"
+-  integrity sha1-SY3eOmxsT4h0WO6e0/CGoSrRtGY=
+-  dependencies:
+-    clone "^2.1.1"
+-    loader-utils "^1.1.0"
+-    pify "^4.0.1"
+-
+-less@^3.9.0:
+-  version "3.13.1"
+-  resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/less/-/less-3.13.1.tgz#0ebc91d2a0e9c0c6735b83d496b0ab0583077909"
+-  integrity sha1-DryR0qDpwMZzW4PUlrCrBYMHeQk=
++less-loader@3.0.0:
++  version "3.0.0"
++  resolved "https://registry.npmmirror.com/less-loader/-/less-loader-3.0.0.tgz#199f7f4a79ff8a195ab47649d71c6d7109da32b9"
++  integrity sha512-lGa3jE5tfBjgNkl/3z04GRJSb9RSEmhWJe23t7dfH/5vqley0UlIqR5lVjpO9Yxp1dUuV0SCtVWzSwHzLhh3cg==
+   dependencies:
+-    copy-anything "^2.0.1"
+-    tslib "^1.10.0"
++    clone-deep "^0.2.4"
++    loader-utils "^1.0.2"
++
++less@2.3.1:
++  version "2.3.1"
++  resolved "https://registry.npmmirror.com/less/-/less-2.3.1.tgz#c10ec082b2f2950f6e1c750e4da14bcc543ed845"
++  integrity sha512-wl8v3Pj6Ke4EmIUoUwRHxW+aPj0t+GsqJ1Hv+3R2q7DVBsMo5lV8qv4KoOiqUKXlpzxBvlDnJcKs7K7y0r5dqQ==
+   optionalDependencies:
+     errno "^0.1.1"
+-    graceful-fs "^4.1.2"
+-    image-size "~0.5.0"
+-    make-dir "^2.1.0"
+-    mime "^1.4.1"
+-    native-request "^1.0.5"
+-    source-map "~0.6.0"
++    graceful-fs "^3.0.5"
++    image-size "~0.3.5"
++    mime "^1.2.11"
++    mkdirp "^0.5.0"
++    promise "^6.0.1"
++    request "^2.51.0"
++    source-map "^0.2.0"
+ 
+ leven@^3.1.0:
+   version "3.1.0"
+@@ -8274,6 +8601,11 @@
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/loader-runner/-/loader-runner-2.4.0.tgz#ed47066bfe534d7e84c4c7b9998c2a75607d9357"
+   integrity sha1-7UcGa/5TTX6ExMe5mYwqdWB9k1c=
+ 
++loader-runner@^4.2.0:
++  version "4.3.0"
++  resolved "https://registry.npmmirror.com/loader-runner/-/loader-runner-4.3.0.tgz#c1b4a163b99f614830353b16755e7149ac2314e1"
++  integrity sha512-3R/1M+yS3j5ou80Me59j7F9IMs4PXs3VqRrm0TU3AbKPxlmpoY1TNscJV/oGJXo8qCatFGTfDbY6W6ipGOYXfg==
++
+ loader-utils@1.2.3:
+   version "1.2.3"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/loader-utils/-/loader-utils-1.2.3.tgz#1ff5dc6911c9f0a062531a4c04b609406108c2c7"
+@@ -8283,7 +8615,7 @@
+     emojis-list "^2.0.0"
+     json5 "^1.0.1"
+ 
+-loader-utils@^1.1.0, loader-utils@^1.2.3, loader-utils@^1.4.0:
++loader-utils@^1.0.2, loader-utils@^1.1.0, loader-utils@^1.2.3, loader-utils@^1.4.0:
+   version "1.4.0"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/loader-utils/-/loader-utils-1.4.0.tgz#c579b5e34cb34b1a74edc6c1fb36bfa371d5a613"
+   integrity sha1-xXm140yzSxp07cbB+za/o3HVphM=
+@@ -8292,6 +8624,15 @@
+     emojis-list "^3.0.0"
+     json5 "^1.0.1"
+ 
++loader-utils@^2.0.0:
++  version "2.0.2"
++  resolved "https://registry.npmmirror.com/loader-utils/-/loader-utils-2.0.2.tgz#d6e3b4fb81870721ae4e0868ab11dd638368c129"
++  integrity sha512-TM57VeHptv569d/GKh6TAYdzKblwDNiumOdkFnejjD0XwTH87K90w3O7AiJRqdQoXygvi1VQTJTLGhJl7WqA7A==
++  dependencies:
++    big.js "^5.2.2"
++    emojis-list "^3.0.0"
++    json5 "^2.1.2"
++
+ locate-path@^2.0.0:
+   version "2.0.0"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/locate-path/-/locate-path-2.0.0.tgz#2b568b265eec944c6d9c0de9c3dbbbca0354cd8e"
+@@ -8431,7 +8772,7 @@
+     pify "^4.0.1"
+     semver "^5.6.0"
+ 
+-make-dir@^3.0.2:
++make-dir@^3.0.2, make-dir@^3.1.0:
+   version "3.1.0"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/make-dir/-/make-dir-3.1.0.tgz#415e967046b3a7f1d185277d84aa58203726a13f"
+   integrity sha1-QV6WcEazp/HRhSd9hKpYIDcmoT8=
+@@ -8607,14 +8948,14 @@
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/mime-db/-/mime-db-1.52.0.tgz#bbabcdc02859f4987301c856e3387ce5ec43bf70"
+   integrity sha1-u6vNwChZ9JhzAchW4zh85exDv3A=
+ 
+-mime-types@^2.1.12, mime-types@~2.1.17, mime-types@~2.1.19, mime-types@~2.1.24, mime-types@~2.1.34:
++mime-types@^2.1.12, mime-types@^2.1.27, mime-types@~2.1.17, mime-types@~2.1.19, mime-types@~2.1.24, mime-types@~2.1.34:
+   version "2.1.35"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/mime-types/-/mime-types-2.1.35.tgz#381a871b62a734450660ae3deee44813f70d959a"
+   integrity sha1-OBqHG2KnNEUGYK497uRIE/cNlZo=
+   dependencies:
+     mime-db "1.52.0"
+ 
+-mime@1.6.0, mime@^1.4.1:
++mime@1.6.0, mime@^1.2.11:
+   version "1.6.0"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/mime/-/mime-1.6.0.tgz#32cd9e5c64553bd58d19a568af452acff04981b1"
+   integrity sha1-Ms2eXGRVO9WNGaVor0Uqz/BJgbE=
+@@ -8761,7 +9102,7 @@
+     for-in "^0.1.3"
+     is-extendable "^0.1.1"
+ 
+-mkdirp@^0.5.1, mkdirp@^0.5.3, mkdirp@^0.5.5, mkdirp@~0.5.1:
++mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@^0.5.3, mkdirp@^0.5.5, mkdirp@~0.5.1:
+   version "0.5.6"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/mkdirp/-/mkdirp-0.5.6.tgz#7def03d2432dcae4ba1d611445c48396062255f6"
+   integrity sha1-fe8D0kMtyuS6HWEURcSDlgYiVfY=
+@@ -8840,6 +9181,11 @@
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/nan/-/nan-2.16.0.tgz#664f43e45460fb98faf00edca0bb0d7b8dce7916"
+   integrity sha1-Zk9D5FRg+5j68A7coLsNe43OeRY=
+ 
++nanoid@^3.3.4:
++  version "3.3.4"
++  resolved "https://registry.npmmirror.com/nanoid/-/nanoid-3.3.4.tgz#730b67e3cd09e2deacf03c027c81c9d9dbc5e8ab"
++  integrity sha512-MqBkQh/OHTS2egovRtLk45wEyNXwF+cokD+1YPf9u5VfJiRdAiRwB2froX5Co9Rh20xs4siNPm8naNotSD6RBw==
++
+ nanomatch@^1.2.9:
+   version "1.2.13"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/nanomatch/-/nanomatch-1.2.13.tgz#b87a8aa4fc0de8fe6be88895b38983ff265bd119"
+@@ -8857,10 +9203,10 @@
+     snapdragon "^0.8.1"
+     to-regex "^3.0.1"
+ 
+-native-request@^1.0.5:
+-  version "1.1.0"
+-  resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/native-request/-/native-request-1.1.0.tgz#acdb30fe2eefa3e1bc8c54b3a6852e9c5c0d3cb0"
+-  integrity sha1-rNsw/i7vo+G8jFSzpoUunFwNPLA=
++natives@^1.1.3:
++  version "1.1.6"
++  resolved "https://registry.npmmirror.com/natives/-/natives-1.1.6.tgz#a603b4a498ab77173612b9ea1acdec4d980f00bb"
++  integrity sha512-6+TDFewD4yxY14ptjKaS63GVdtKiES1pTPyxn9Jb0rBqPMZ7VcCiooEhPNsr+mqHtMGxa/5c/HhcC4uPEUw/nA==
+ 
+ natural-compare@^1.4.0:
+   version "1.4.0"
+@@ -8872,7 +9218,7 @@
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/negotiator/-/negotiator-0.6.3.tgz#58e323a72fedc0d6f9cd4d31fe49f51479590ccd"
+   integrity sha1-WOMjpy/twNb5zU0x/kn1FHlZDM0=
+ 
+-neo-async@^2.5.0, neo-async@^2.6.1:
++neo-async@^2.5.0, neo-async@^2.6.1, neo-async@^2.6.2:
+   version "2.6.2"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
+   integrity sha1-tKr7k+OustgXTKU88WOrfXMIMF8=
+@@ -9385,7 +9731,7 @@
+     inherits "^2.0.3"
+     readable-stream "^2.1.5"
+ 
+-param-case@^3.0.3:
++param-case@^3.0.3, param-case@^3.0.4:
+   version "3.0.4"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/param-case/-/param-case-3.0.4.tgz#7d17fe4aa12bde34d4a77d91acfb6219caad01c5"
+   integrity sha1-fRf+SqEr3jTUp32RrPtiGcqtAcU=
+@@ -9629,7 +9975,7 @@
+   dependencies:
+     find-up "^3.0.0"
+ 
+-pkg-dir@^4.1.0:
++pkg-dir@^4.1.0, pkg-dir@^4.2.0:
+   version "4.2.0"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/pkg-dir/-/pkg-dir-4.2.0.tgz#f099133df7ede422e81d1d8448270eeb3e4261f3"
+   integrity sha1-8JkTPfft5CLoHR2ESCcO6z5CYfM=
+@@ -9989,6 +10335,11 @@
+   dependencies:
+     postcss "^7.0.5"
+ 
++postcss-modules-extract-imports@^3.0.0:
++  version "3.0.0"
++  resolved "https://registry.npmmirror.com/postcss-modules-extract-imports/-/postcss-modules-extract-imports-3.0.0.tgz#cda1f047c0ae80c97dbe28c3e76a43b88025741d"
++  integrity sha512-bdHleFnP3kZ4NYDhuGlVK+CMrQ/pqUm8bx/oGL93K6gVwiclvX5x0n76fYMKuIGKzlABOy13zsvqjb0f92TEXw==
++
+ postcss-modules-local-by-default@^3.0.2:
+   version "3.0.3"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/postcss-modules-local-by-default/-/postcss-modules-local-by-default-3.0.3.tgz#bb14e0cc78279d504dbdcbfd7e0ca28993ffbbb0"
+@@ -9998,6 +10349,15 @@
+     postcss "^7.0.32"
+     postcss-selector-parser "^6.0.2"
+     postcss-value-parser "^4.1.0"
++
++postcss-modules-local-by-default@^4.0.0:
++  version "4.0.0"
++  resolved "https://registry.npmmirror.com/postcss-modules-local-by-default/-/postcss-modules-local-by-default-4.0.0.tgz#ebbb54fae1598eecfdf691a02b3ff3b390a5a51c"
++  integrity sha512-sT7ihtmGSF9yhm6ggikHdV0hlziDTX7oFoXtuVWeDd3hHObNkcHRo9V3yg7vCAY7cONyxJC/XXCmmiHHcvX7bQ==
++  dependencies:
++    icss-utils "^5.0.0"
++    postcss-selector-parser "^6.0.2"
++    postcss-value-parser "^4.1.0"
+ 
+ postcss-modules-scope@^2.1.1:
+   version "2.2.0"
+@@ -10007,6 +10367,13 @@
+     postcss "^7.0.6"
+     postcss-selector-parser "^6.0.0"
+ 
++postcss-modules-scope@^3.0.0:
++  version "3.0.0"
++  resolved "https://registry.npmmirror.com/postcss-modules-scope/-/postcss-modules-scope-3.0.0.tgz#9ef3151456d3bbfa120ca44898dfca6f2fa01f06"
++  integrity sha512-hncihwFA2yPath8oZ15PZqvWGkWf+XUfQgUGamS4LqoP1anQLOsOJw0vr7J7IwLpoY9fatA2qiGUGmuZL0Iqlg==
++  dependencies:
++    postcss-selector-parser "^6.0.4"
++
+ postcss-modules-values@^3.0.0:
+   version "3.0.0"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/postcss-modules-values/-/postcss-modules-values-3.0.0.tgz#5b5000d6ebae29b4255301b4a3a54574423e7f10"
+@@ -10015,6 +10382,13 @@
+     icss-utils "^4.0.0"
+     postcss "^7.0.6"
+ 
++postcss-modules-values@^4.0.0:
++  version "4.0.0"
++  resolved "https://registry.npmmirror.com/postcss-modules-values/-/postcss-modules-values-4.0.0.tgz#d7c5e7e68c3bb3c9b27cbf48ca0bb3ffb4602c9c"
++  integrity sha512-RDxHkAiEGI78gS2ofyvCsu7iycRv7oqw5xMWn9iMoR0N/7mf9D50ecQqUo5BZ9Zh2vH4bCUR/ktCqbB9m8vJjQ==
++  dependencies:
++    icss-utils "^5.0.0"
++
+ postcss-nesting@^7.0.0:
+   version "7.0.1"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/postcss-nesting/-/postcss-nesting-7.0.1.tgz#b50ad7b7f0173e5b5e3880c3501344703e04c052"
+@@ -10264,7 +10638,7 @@
+     indexes-of "^1.0.1"
+     uniq "^1.0.1"
+ 
+-postcss-selector-parser@^6.0.0, postcss-selector-parser@^6.0.2:
++postcss-selector-parser@^6.0.0, postcss-selector-parser@^6.0.2, postcss-selector-parser@^6.0.4:
+   version "6.0.10"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/postcss-selector-parser/-/postcss-selector-parser-6.0.10.tgz#79b61e2c0d1bfc2602d549e11d0876256f8df88d"
+   integrity sha1-ebYeLA0b/CYC1UnhHQh2JW+N+I0=
+@@ -10295,7 +10669,7 @@
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/postcss-value-parser/-/postcss-value-parser-3.3.1.tgz#9ff822547e2893213cf1c30efa51ac5fd1ba8281"
+   integrity sha1-n/giVH4okyE88cMO+lGsX9G6goE=
+ 
+-postcss-value-parser@^4.0.2, postcss-value-parser@^4.1.0:
++postcss-value-parser@^4.0.2, postcss-value-parser@^4.1.0, postcss-value-parser@^4.2.0:
+   version "4.2.0"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/postcss-value-parser/-/postcss-value-parser-4.2.0.tgz#723c09920836ba6d3e5af019f92bc0971c02e514"
+   integrity sha1-cjwJkgg2um0+WvAZ+SvAlxwC5RQ=
+@@ -10326,6 +10700,15 @@
+     picocolors "^0.2.1"
+     source-map "^0.6.1"
+ 
++postcss@^8.4.7:
++  version "8.4.14"
++  resolved "https://registry.npmmirror.com/postcss/-/postcss-8.4.14.tgz#ee9274d5622b4858c1007a74d76e42e56fd21caf"
++  integrity sha512-E398TUmfAYFPBSdzgeieK2Y1+1cpdxJx8yXbK/m57nRhKSmk1GB2tO4lbLBtlkfPQTDKfe4Xqv1ASWPpayPEig==
++  dependencies:
++    nanoid "^3.3.4"
++    picocolors "^1.0.0"
++    source-map-js "^1.0.2"
++
+ prefix-style@2.0.1:
+   version "2.0.1"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/prefix-style/-/prefix-style-2.0.1.tgz#66bba9a870cfda308a5dc20e85e9120932c95a06"
+@@ -10359,6 +10742,14 @@
+     lodash "^4.17.20"
+     renderkid "^2.0.4"
+ 
++pretty-error@^4.0.0:
++  version "4.0.0"
++  resolved "https://registry.npmmirror.com/pretty-error/-/pretty-error-4.0.0.tgz#90a703f46dd7234adb46d0f84823e9d1cb8f10d6"
++  integrity sha512-AoJ5YMAcXKYxKhuJGdcvse+Voc6v1RgnsR3nWcYU7q4t6z0Q6T86sv5Zq8VIRbOWWFpvdGE83LtdSMNd+6Y0xw==
++  dependencies:
++    lodash "^4.17.20"
++    renderkid "^3.0.0"
++
+ pretty-format@^24.0.0, pretty-format@^24.3.0, pretty-format@^24.9.0:
+   version "24.9.0"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/pretty-format/-/pretty-format-24.9.0.tgz#12fac31b37019a4eea3c11aa9a959eb7628aa7c9"
+@@ -10413,6 +10804,13 @@
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/promise-inflight/-/promise-inflight-1.0.1.tgz#98472870bf228132fcbdd868129bad12c3c029e3"
+   integrity sha1-mEcocL8igTL8vdhoEputEsPAKeM=
+ 
++promise@^6.0.1:
++  version "6.1.0"
++  resolved "https://registry.npmmirror.com/promise/-/promise-6.1.0.tgz#2ce729f6b94b45c26891ad0602c5c90e04c6eef6"
++  integrity sha512-O+uwGKreKNKkshzZv2P7N64lk6EP17iXBn0PbUnNQhk+Q0AHLstiTrjkx3v5YBd3cxUe7Sq6KyRhl/A0xUjk7Q==
++  dependencies:
++    asap "~1.0.0"
++
+ promise@^7.1.1:
+   version "7.3.1"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/promise/-/promise-7.3.1.tgz#064b72602b18f90f29192b8b1bc418ffd1ebd3bf"
+@@ -11397,6 +11795,13 @@
+   dependencies:
+     util.promisify "^1.0.0"
+ 
++rechoir@^0.7.0:
++  version "0.7.1"
++  resolved "https://registry.npmmirror.com/rechoir/-/rechoir-0.7.1.tgz#9478a96a1ca135b5e88fc027f03ee92d6c645686"
++  integrity sha512-/njmZ8s1wVeR6pjTZ+0nCnv8SpZNRMT2D1RLOJQESlYFDBvwpTA4KWJpZ+sBJ4+vhjILRcK7JIFdGCdxEAAitg==
++  dependencies:
++    resolve "^1.9.0"
++
+ recursive-readdir@2.2.2:
+   version "2.2.2"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/recursive-readdir/-/recursive-readdir-2.2.2.tgz#9946fb3274e1628de6e36b2f6714953b4845094f"
+@@ -11530,6 +11935,17 @@
+     lodash "^4.17.21"
+     strip-ansi "^3.0.1"
+ 
++renderkid@^3.0.0:
++  version "3.0.0"
++  resolved "https://registry.npmmirror.com/renderkid/-/renderkid-3.0.0.tgz#5fd823e4d6951d37358ecc9a58b1f06836b6268a"
++  integrity sha512-q/7VIQA8lmM1hF+jn+sFSPWGlMkSAeNYcPLmDQx2zzuiDfaLrOmumR8iaUKlenFgh0XRPIUeSPlH3A+AW3Z5pg==
++  dependencies:
++    css-select "^4.1.3"
++    dom-converter "^0.2.0"
++    htmlparser2 "^6.1.0"
++    lodash "^4.17.21"
++    strip-ansi "^6.0.1"
++
+ repeat-element@^1.1.2:
+   version "1.1.4"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/repeat-element/-/repeat-element-1.1.4.tgz#be681520847ab58c7568ac75fbfad28ed42d39e9"
+@@ -11556,7 +11972,7 @@
+     stealthy-require "^1.1.1"
+     tough-cookie "^2.3.3"
+ 
+-request@^2.87.0, request@^2.88.0:
++request@^2.51.0, request@^2.87.0, request@^2.88.0:
+   version "2.88.2"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/request/-/request-2.88.2.tgz#d73c918731cb5a87da047e207234146f664d12b3"
+   integrity sha1-1zyRhzHLWofaBH4gcjQUb2ZNErM=
+@@ -11619,6 +12035,13 @@
+   dependencies:
+     resolve-from "^3.0.0"
+ 
++resolve-cwd@^3.0.0:
++  version "3.0.0"
++  resolved "https://registry.npmmirror.com/resolve-cwd/-/resolve-cwd-3.0.0.tgz#0f0075f1bb2544766cf73ba6a6e2adfebcb13f2d"
++  integrity sha512-OrZaX2Mb+rJCpH/6CpSqt9xFVpN++x01XnN2ie9g6P5/3xelLAkXWVADpdz1IHD/KFfEXyE6V0U01OQ3UO2rEg==
++  dependencies:
++    resolve-from "^5.0.0"
++
+ resolve-dir@^1.0.0, resolve-dir@^1.0.1:
+   version "1.0.1"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/resolve-dir/-/resolve-dir-1.0.1.tgz#79a40644c362be82f26effe739c9bb5382046f43"
+@@ -11687,7 +12110,7 @@
+   dependencies:
+     path-parse "^1.0.6"
+ 
+-resolve@^1.10.0, resolve@^1.10.1, resolve@^1.12.0, resolve@^1.14.2, resolve@^1.15.1, resolve@^1.20.0, resolve@^1.22.0, resolve@^1.3.2, resolve@^1.8.1:
++resolve@^1.10.0, resolve@^1.10.1, resolve@^1.12.0, resolve@^1.14.2, resolve@^1.15.1, resolve@^1.20.0, resolve@^1.22.0, resolve@^1.3.2, resolve@^1.8.1, resolve@^1.9.0:
+   version "1.22.1"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/resolve/-/resolve-1.22.1.tgz#27cb2ebb53f91abb49470a928bba7558066ac177"
+   integrity sha1-J8suu1P5GrtJRwqSi7p1WAZqwXc=
+@@ -11918,6 +12341,15 @@
+     ajv "^6.12.4"
+     ajv-keywords "^3.5.2"
+ 
++schema-utils@^3.1.0, schema-utils@^3.1.1:
++  version "3.1.1"
++  resolved "https://registry.npmmirror.com/schema-utils/-/schema-utils-3.1.1.tgz#bc74c4b6b6995c1d88f76a8b77bea7219e0c8281"
++  integrity sha512-Y5PQxS4ITlC+EahLuXaY86TXfR7Dc5lw294alXOq86JAHCihAIZfqv8nNCWvaEJvaC51uN9hbLGeV0cFBdH+Fw==
++  dependencies:
++    "@types/json-schema" "^7.0.8"
++    ajv "^6.12.5"
++    ajv-keywords "^3.5.2"
++
+ screenfull@^5.0.2:
+   version "5.2.0"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/screenfull/-/screenfull-5.2.0.tgz#6533d524d30621fc1283b9692146f3f13a93d1ba"
+@@ -11962,7 +12394,7 @@
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/semver/-/semver-7.0.0.tgz#5f3ca35761e47e05b206c6daff2cf814f0316b8e"
+   integrity sha1-XzyjV2HkfgWyBsba/yz4FPAxa44=
+ 
+-semver@^7.0.0, semver@^7.3.2, semver@^7.3.7:
++semver@^7.0.0, semver@^7.3.2, semver@^7.3.5, semver@^7.3.7:
+   version "7.3.7"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/semver/-/semver-7.3.7.tgz#12c5b649afdbf9049707796e22a4028814ce523f"
+   integrity sha1-EsW2Sa/b+QSXB3luIqQCiBTOUj8=
+@@ -12000,6 +12432,13 @@
+   dependencies:
+     randombytes "^2.1.0"
+ 
++serialize-javascript@^6.0.0:
++  version "6.0.0"
++  resolved "https://registry.npmmirror.com/serialize-javascript/-/serialize-javascript-6.0.0.tgz#efae5d88f45d7924141da8b5c3a7a7e663fefeb8"
++  integrity sha512-Qr3TosvguFt8ePWqsvRfrKyQXIiW+nGbYpy8XK24NQHE83caxWt+mIymTT19DGFbNWNLfEwsrkSmN64lVWB9ag==
++  dependencies:
++    randombytes "^2.1.0"
++
+ serve-index@^1.9.1:
+   version "1.9.1"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/serve-index/-/serve-index-1.9.1.tgz#d3768d69b1e7d82e5ce050fff5b453bea12a9239"
+@@ -12234,6 +12673,11 @@
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/source-list-map/-/source-list-map-2.0.1.tgz#3993bd873bfc48479cca9ea3a547835c7c154b34"
+   integrity sha1-OZO9hzv8SEecyp6jpUeDXHwVSzQ=
+ 
++source-map-js@^1.0.2:
++  version "1.0.2"
++  resolved "https://registry.npmmirror.com/source-map-js/-/source-map-js-1.0.2.tgz#adbc361d9c62df380125e7f161f71c826f1e490c"
++  integrity sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==
++
+ source-map-resolve@^0.5.0, source-map-resolve@^0.5.2:
+   version "0.5.3"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/source-map-resolve/-/source-map-resolve-0.5.3.tgz#190866bece7553e1f8f267a2ee82c606b5509a1a"
+@@ -12245,7 +12689,7 @@
+     source-map-url "^0.4.0"
+     urix "^0.1.0"
+ 
+-source-map-support@^0.5.6, source-map-support@~0.5.12:
++source-map-support@^0.5.6, source-map-support@~0.5.12, source-map-support@~0.5.20:
+   version "0.5.21"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/source-map-support/-/source-map-support-0.5.21.tgz#04fe7c7f9e1ed2d662233c28cb2b35b9f63f6e4f"
+   integrity sha1-BP58f54e0tZiIzwoyys1ufY/bk8=
+@@ -12263,6 +12707,13 @@
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
+   integrity sha1-dHIq8y6WFOnCh6jQu95IteLxomM=
+ 
++source-map@^0.2.0:
++  version "0.2.0"
++  resolved "https://registry.npmmirror.com/source-map/-/source-map-0.2.0.tgz#dab73fbcfc2ba819b4de03bd6f6eaa48164b3f9d"
++  integrity sha512-CBdZ2oa/BHhS4xj5DlhjWNHcan57/5YuvfdLf17iVmIpd9KRm+DFLmC6nBNj+6Ua7Kt3TmOjDpQT1aTYOQtoUA==
++  dependencies:
++    amdefine ">=0.0.4"
++
+ source-map@^0.5.0, source-map@^0.5.6:
+   version "0.5.7"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
+@@ -12378,6 +12829,11 @@
+   dependencies:
+     escape-string-regexp "^2.0.0"
+ 
++stackframe@^1.3.4:
++  version "1.3.4"
++  resolved "https://registry.npmmirror.com/stackframe/-/stackframe-1.3.4.tgz#b881a004c8c149a5e8efef37d51b16e412943310"
++  integrity sha512-oeVtt7eWQS+Na6F//S4kJ2K2VbRlS9D43mAlMyVpVWovy9o+jfgH8O9agzANzaiLjclA0oYzUXEM4PurhSUChw==
++
+ static-extend@^0.1.1:
+   version "0.1.2"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/static-extend/-/static-extend-0.1.2.tgz#60809c39cbff55337226fd5e0b520f341f1fb5c6"
+@@ -12632,6 +13088,11 @@
+     loader-utils "^1.1.0"
+     schema-utils "^1.0.0"
+ 
++style-loader@^3.3.1:
++  version "3.3.1"
++  resolved "https://registry.npmmirror.com/style-loader/-/style-loader-3.3.1.tgz#057dfa6b3d4d7c7064462830f9113ed417d38575"
++  integrity sha512-GPcQ+LDJbrcxHORTRes6Jy2sfvK2kS6hpSfI/fXhPt+spVzxF6LJ1dHLN9zIGmVaaP044YKaIatFaufENRiDoQ==
++
+ stylehacks@^4.0.0:
+   version "4.0.3"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/stylehacks/-/stylehacks-4.0.3.tgz#6718fcaf4d1e07d8a1318690881e8d96726a71d5"
+@@ -12667,6 +13128,13 @@
+   dependencies:
+     has-flag "^4.0.0"
+ 
++supports-color@^8.0.0:
++  version "8.1.1"
++  resolved "https://registry.npmmirror.com/supports-color/-/supports-color-8.1.1.tgz#cd6fc17e28500cff56c1b86c0a7fd4a54a73005c"
++  integrity sha512-MpUEN2OodtUzxvKQl72cUF7RQ5EiHsGvSsVG0ia9c5RbWGL2CI4C7EpPS8UTBIplnlzZiNuV56w+FuNxy3ty2Q==
++  dependencies:
++    has-flag "^4.0.0"
++
+ supports-preserve-symlinks-flag@^1.0.0:
+   version "1.0.0"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz#6eda4bd344a3c94aea376d4cc31bc77311039e09"
+@@ -12716,6 +13184,11 @@
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/tapable/-/tapable-1.1.3.tgz#a1fccc06b58db61fd7a45da2da44f5f3a3e67ba2"
+   integrity sha1-ofzMBrWNth/XpF2i2kT186Pme6I=
+ 
++tapable@^2.0.0, tapable@^2.1.1, tapable@^2.2.0:
++  version "2.2.1"
++  resolved "https://registry.npmmirror.com/tapable/-/tapable-2.2.1.tgz#1967a73ef4060a82f12ab96af86d52fdb76eeca0"
++  integrity sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ==
++
+ terser-webpack-plugin@2.3.5:
+   version "2.3.5"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/terser-webpack-plugin/-/terser-webpack-plugin-2.3.5.tgz#5ad971acce5c517440ba873ea4f09687de2f4a81"
+@@ -12746,6 +13219,17 @@
+     webpack-sources "^1.4.0"
+     worker-farm "^1.7.0"
+ 
++terser-webpack-plugin@^5.1.3:
++  version "5.3.3"
++  resolved "https://registry.npmmirror.com/terser-webpack-plugin/-/terser-webpack-plugin-5.3.3.tgz#8033db876dd5875487213e87c627bca323e5ed90"
++  integrity sha512-Fx60G5HNYknNTNQnzQ1VePRuu89ZVYWfjRAeT5rITuCY/1b08s49e5kSQwHDirKZWuoKOBRFS98EUUoZ9kLEwQ==
++  dependencies:
++    "@jridgewell/trace-mapping" "^0.3.7"
++    jest-worker "^27.4.5"
++    schema-utils "^3.1.1"
++    serialize-javascript "^6.0.0"
++    terser "^5.7.2"
++
+ terser@^4.1.2, terser@^4.4.3, terser@^4.6.3:
+   version "4.8.0"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/terser/-/terser-4.8.0.tgz#63056343d7c70bb29f3af665865a46fe03a0df17"
+@@ -12755,6 +13239,16 @@
+     source-map "~0.6.1"
+     source-map-support "~0.5.12"
+ 
++terser@^5.10.0, terser@^5.7.2:
++  version "5.14.1"
++  resolved "https://registry.npmmirror.com/terser/-/terser-5.14.1.tgz#7c95eec36436cb11cf1902cc79ac564741d19eca"
++  integrity sha512-+ahUAE+iheqBTDxXhTisdA8hgvbEG1hHOQ9xmNjeUJSoi6DU/gMrKNcfZjHkyY6Alnuyc+ikYJaxxfHkT3+WuQ==
++  dependencies:
++    "@jridgewell/source-map" "^0.3.2"
++    acorn "^8.5.0"
++    commander "^2.20.0"
++    source-map-support "~0.5.20"
++
+ test-exclude@^5.2.3:
+   version "5.2.3"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/test-exclude/-/test-exclude-5.2.3.tgz#c3d3e1e311eb7ee405e092dac10aefd09091eac0"
+@@ -12967,7 +13461,7 @@
+     minimist "^1.2.6"
+     strip-bom "^3.0.0"
+ 
+-tslib@^1.10.0, tslib@^1.8.1, tslib@^1.9.0:
++tslib@^1.8.1, tslib@^1.9.0:
+   version "1.14.1"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
+   integrity sha1-zy04vcNKE0vK8QkcQfZhni9nLQA=
+@@ -13386,6 +13880,14 @@
+     chokidar "^3.4.1"
+     watchpack-chokidar2 "^2.0.1"
+ 
++watchpack@^2.3.1:
++  version "2.4.0"
++  resolved "https://registry.npmmirror.com/watchpack/-/watchpack-2.4.0.tgz#fa33032374962c78113f93c7f2fb4c54c9862a5d"
++  integrity sha512-Lcvm7MGST/4fup+ifyKi2hjyIAwcdI4HRgtvTpIUxBRhB+RFtUh8XtDOxUfctVCnhVi+QQj49i91OyvzkJl6cg==
++  dependencies:
++    glob-to-regexp "^0.4.1"
++    graceful-fs "^4.1.2"
++
+ wbuf@^1.1.0, wbuf@^1.7.3:
+   version "1.7.3"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/wbuf/-/wbuf-1.7.3.tgz#c1d8d149316d3ea852848895cb6a0bfe887b87df"
+@@ -13403,6 +13905,24 @@
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/webidl-conversions/-/webidl-conversions-4.0.2.tgz#a855980b1f0b6b359ba1d5d9fb39ae941faa63ad"
+   integrity sha1-qFWYCx8LazWbodXZ+zmulB+qY60=
+ 
++webpack-cli@^4.10.0:
++  version "4.10.0"
++  resolved "https://registry.npmmirror.com/webpack-cli/-/webpack-cli-4.10.0.tgz#37c1d69c8d85214c5a65e589378f53aec64dab31"
++  integrity sha512-NLhDfH/h4O6UOy+0LSso42xvYypClINuMNBVVzX4vX98TmTaTUxwRbXdhucbFMd2qLaCTcLq/PdYrvi8onw90w==
++  dependencies:
++    "@discoveryjs/json-ext" "^0.5.0"
++    "@webpack-cli/configtest" "^1.2.0"
++    "@webpack-cli/info" "^1.5.0"
++    "@webpack-cli/serve" "^1.7.0"
++    colorette "^2.0.14"
++    commander "^7.0.0"
++    cross-spawn "^7.0.3"
++    fastest-levenshtein "^1.0.12"
++    import-local "^3.0.2"
++    interpret "^2.2.0"
++    rechoir "^0.7.0"
++    webpack-merge "^5.7.3"
++
+ webpack-dev-middleware@^3.7.2:
+   version "3.7.3"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/webpack-dev-middleware/-/webpack-dev-middleware-3.7.3.tgz#0639372b143262e2b84ab95d3b91a7597061c2c5"
+@@ -13471,6 +13991,14 @@
+     object.entries "^1.1.0"
+     tapable "^1.0.0"
+ 
++webpack-merge@^5.7.3:
++  version "5.8.0"
++  resolved "https://registry.npmmirror.com/webpack-merge/-/webpack-merge-5.8.0.tgz#2b39dbf22af87776ad744c390223731d30a68f61"
++  integrity sha512-/SaI7xY0831XwP6kzuwhKWVKDP9t1QY1h65lAFLbZqMPIuYcD9QAW4u9STIbU9kaJbPBB/geU/gLr1wDjOhQ+Q==
++  dependencies:
++    clone-deep "^4.0.1"
++    wildcard "^2.0.0"
++
+ webpack-sources@^1.1.0, webpack-sources@^1.4.0, webpack-sources@^1.4.1, webpack-sources@^1.4.3:
+   version "1.4.3"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/webpack-sources/-/webpack-sources-1.4.3.tgz#eedd8ec0b928fbf1cbfe994e22d2d890f330a933"
+@@ -13479,6 +14007,11 @@
+     source-list-map "^2.0.0"
+     source-map "~0.6.1"
+ 
++webpack-sources@^3.2.3:
++  version "3.2.3"
++  resolved "https://registry.npmmirror.com/webpack-sources/-/webpack-sources-3.2.3.tgz#2d4daab8451fd4b240cc27055ff6a0c2ccea0cde"
++  integrity sha512-/DyMEOrDgLKKIG0fmvtz+4dUX/3Ghozwgm6iPp8KRhvn+eQf9+Q7GWxVNMk3+uCPWfdXYC4ExGBckIXdFEfH1w==
++
+ webpack@4.42.0:
+   version "4.42.0"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/webpack/-/webpack-4.42.0.tgz#b901635dd6179391d90740a63c93f76f39883eb8"
+@@ -13508,6 +14041,36 @@
+     watchpack "^1.6.0"
+     webpack-sources "^1.4.1"
+ 
++webpack@^5.73.0:
++  version "5.73.0"
++  resolved "https://registry.npmmirror.com/webpack/-/webpack-5.73.0.tgz#bbd17738f8a53ee5760ea2f59dce7f3431d35d38"
++  integrity sha512-svjudQRPPa0YiOYa2lM/Gacw0r6PvxptHj4FuEKQ2kX05ZLkjbVc5MnPs6its5j7IZljnIqSVo/OsY2X0IpHGA==
++  dependencies:
++    "@types/eslint-scope" "^3.7.3"
++    "@types/estree" "^0.0.51"
++    "@webassemblyjs/ast" "1.11.1"
++    "@webassemblyjs/wasm-edit" "1.11.1"
++    "@webassemblyjs/wasm-parser" "1.11.1"
++    acorn "^8.4.1"
++    acorn-import-assertions "^1.7.6"
++    browserslist "^4.14.5"
++    chrome-trace-event "^1.0.2"
++    enhanced-resolve "^5.9.3"
++    es-module-lexer "^0.9.0"
++    eslint-scope "5.1.1"
++    events "^3.2.0"
++    glob-to-regexp "^0.4.1"
++    graceful-fs "^4.2.9"
++    json-parse-even-better-errors "^2.3.1"
++    loader-runner "^4.2.0"
++    mime-types "^2.1.27"
++    neo-async "^2.6.2"
++    schema-utils "^3.1.0"
++    tapable "^2.1.1"
++    terser-webpack-plugin "^5.1.3"
++    watchpack "^2.3.1"
++    webpack-sources "^3.2.3"
++
+ websocket-driver@>=0.5.1:
+   version "0.7.4"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/websocket-driver/-/websocket-driver-0.7.4.tgz#89ad5295bbf64b480abcba31e4953aca706f5760"
+@@ -13595,6 +14158,11 @@
+   dependencies:
+     isexe "^2.0.0"
+ 
++wildcard@^2.0.0:
++  version "2.0.0"
++  resolved "https://registry.npmmirror.com/wildcard/-/wildcard-2.0.0.tgz#a77d20e5200c6faaac979e4b3aadc7b3dd7f8fec"
++  integrity sha512-JcKqAHLPxcdb9KM49dufGXn2x3ssnfjbcaQdLlfZsL9rH9wgDQjUtDxbo8NE0F6SFvydeu1VhZe7hZuHsB2/pw==
++
+ wmf@~1.0.1:
+   version "1.0.2"
+   resolved "http://repo.wuxingdev.cn:80/artifactory/api/npm/npm-repo/wmf/-/wmf-1.0.2.tgz#7d19d621071a08c2bdc6b7e688a9c435298cc2da"
