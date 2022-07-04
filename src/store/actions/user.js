@@ -40,3 +40,14 @@ export const resetUser = () => {
     type: types.USER_RESET_USER
   }
 }
+
+// export const loginWithEmptyUser = () => (dispatch) => {
+//   return new Promise((resolve, reject) => {
+//     const {userInfo} = {
+//       name: 'admin',
+//       role: 'admin',
+//       avatar: ''
+//     }
+//     dispatch(setUserInfo(userInfo))
+//   })
+// }

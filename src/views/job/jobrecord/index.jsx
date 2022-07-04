@@ -61,6 +61,8 @@ class JobRecordComponent extends Component {
           this.fetchData()
         }
       )
+    } else {
+      this.fetchData()
     }
     this.setState({ loading: false })
   }

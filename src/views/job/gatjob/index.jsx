@@ -498,7 +498,7 @@ class GatJobComponent extends Component {
           loading={this.state.loading}
           pagination={false}>
           <Column title="序号" key="index" width={50} align="center" render={(text, record, index) => { return index + 1 }} />
-          <Column title="命名空间" dataIndex="zkPath" width={200} align="center"/>
+          <Column title="命名空间" dataIndex="zkPath" width={150} align="center"/>
           <Column title="作业名称" width={200} align="center"
                   render = {(text, record) => {
                     return <Link to={{
@@ -538,13 +538,13 @@ class GatJobComponent extends Component {
                   }
                 }
               }/>
-          <Column title="操作" dataIndex="operate" width={210} align="center"
+          <Column title="操作" dataIndex="operate" width={240} align="center"
             render = {(text, record) => {
               if (record.status === '0') {
                 return (
                   <span>
                     <Button key="1" type="primary" size="small" style={greenButtonStyle}>
-                      <Link to={{ pathname: '/job/jobrecord', reqParams: record.jobName }}>详情</Link></Button>
+                      <Link to={{ pathname: '/job/jobrecord', reqParams: record.jobName }}>执行记录</Link></Button>
                     <Divider type="vertical" />
                     <Button key="2" type="primary" size="small" onClick={this.showEditGatJobModal.bind(null, record)} style={orangeButtonStyle}>编辑</Button>
                     <Divider type="vertical" />
@@ -552,7 +552,7 @@ class GatJobComponent extends Component {
                   </span>
                 )
               } else {
-                return (<span><Button key="1" type="primary" size="small" style={greenButtonStyle}><Link to={{ pathname: '/job/jobrecord', reqParams: record.jobName }}>详情</Link></Button></span>)
+                return (<span><Button key="1" type="primary" size="small" style={greenButtonStyle}><Link to={{ pathname: '/job/jobrecord', reqParams: record.jobName }}>执行记录</Link></Button></span>)
               }
             }}/>
         </Table>

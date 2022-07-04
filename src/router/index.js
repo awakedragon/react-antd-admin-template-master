@@ -1,12 +1,12 @@
 import React from 'react'
-import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
+import { HashRouter, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getUserInfo } from '@/store/actions'
 import Layout from '@/views/layout'
 import Login from '@/views/login'
 class Router extends React.Component {
   render () {
-    const { token, role, getUserInfo } = this.props
+    const { role, getUserInfo } = this.props
     return (
       <HashRouter>
         <Switch>
@@ -14,15 +14,21 @@ class Router extends React.Component {
           <Route
             path="/"
             render={() => {
-              if (!token) {
-                return <Redirect to="/login" />
-              } else {
+                let mockToken = 'admin-token'
                 if (role) {
-                  return <Layout />
+                    return <Layout />
                 } else {
-                  getUserInfo(token).then(() => <Layout />)
+                    getUserInfo(mockToken).then(() => <Layout />)
                 }
-              }
+              // if (!token) {
+              //   return <Redirect to="/login" />
+              // } else {
+              //   if (role) {
+              //     return <Layout />
+              //   } else {
+              //     getUserInfo(token).then(() => <Layout />)
+              //   }
+              // }
             }}
           />
         </Switch>

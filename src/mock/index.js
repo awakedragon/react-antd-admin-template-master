@@ -1,8 +1,6 @@
 import Mock from 'mockjs'
 import loginAPI from './login'
 import remoteSearchAPI from './remoteSearch'
-import excelAPI from './excel'
-import tableAPI from './table'
 import monitor from './monitor'
 
 // 登录与用户相关
@@ -17,14 +15,6 @@ Mock.mock(/\/user\/add/, 'post', loginAPI.addUser)
 
 // dashboard
 Mock.mock(/\/transaction\/list/, 'get', remoteSearchAPI.transactionList)
-
-// excel
-Mock.mock(/\/excel\/list/, 'get', excelAPI.excelList)
-
-// table
-Mock.mock(/\/table\/list/, 'post', tableAPI.tableList)
-Mock.mock(/\/table\/delete/, 'post', tableAPI.deleteItem)
-Mock.mock(/\/table\/edit/, 'post', tableAPI.editItem)
 
 // monitor
 Mock.mock(/\/monitor/, 'post', monitor.monitor)
